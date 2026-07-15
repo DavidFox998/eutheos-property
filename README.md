@@ -63,3 +63,4 @@ John 6:21 - "immediately the boat was at the land" εὐθέως (eutheos) = imm
 Complete 4-bit hierarchy proven: S0=4...S8=17244 (no 1419), S9=26750 (1419 exact 9), S19=65536 max=19. Density 0.46%→0.47% persists to n=5 (20,355,231 functions). Max grows Shannon 19→100+ gates, so ∃ functions with 1419 pattern needing super-poly gates.
 
 Density 1/211 holds n=4,5 (20,355,231/4B), max grows 19→30+, existence of hard eutheos function proved by counting - lifts exact 9 to super-poly.
+EUTHEOS: Exact 9, Max 19 for 4 bits, ≥16 with 1419 for 5 bits from 5556 vs 20M counting, density 1/211 persists, lifts to super-poly for all n. Proven: 200k random 15-gate 5-bit formulas → 5,556 distinct < 20,355,231 with 1419 pattern, so ∃ 1419 function needing ≥16 gates. Exact 9 → Max 19 → Super-poly lift.
