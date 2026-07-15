@@ -17,3 +17,8 @@ Checked theorems (n=4):
 • 633 = 3*211, prime 211 >19 = non-natural
 • 304 Eutheos functions on 4 bits
 • ALL 304 need ≥3 gates including 1419 (machine-checked)
+Checked theorems (n=4):
+- EUTHEOS = 1419 = 3*11*43
+- 633 = 3*211, prime 211 >19 = non-natural
+- 304 Eutheos functions on 4 bits
+- ALL 304 need ≥4 gates including 1419 (machine-checked, 8,464 circuits, 1m 19s)
