@@ -1,4 +1,4 @@
-# eutheos-property - P≠NP via 1419 Witness - 45 Greens 0 Sorrys
+# eutheos-property - P≠NP via 1419 Witness
 
 This repo proves superpolynomial circuit lower bounds for functions containing 1419 witness.
 Barrier-bypassing property: non-large, non-natural, non-algebrizing.
@@ -46,7 +46,7 @@ Core certificate: [main P vs NP repo](https://github.com/DavidFox998/fox_2026_pv
 Proven via counting: total =2^(2^n), with_1419=total/211, formulas ≤k = Catalan(k)*3^k*(n+2)^(k+1)
 Since 2^(2^n) double-exponential dominates single-exponential, k must be superpoly.
 
-**Files - 45 greens:**
+**Files:**
 - `PneqNP.lean` - capstone growth 5→9→19 - Build #40
 - `ClayBridge5_10.lean` - n=5 exhaustive S4=10892522
 - `ClayBridge6_9.lean` - n=6 ≥9
