@@ -28,7 +28,7 @@ Core conditional certificate is in [main P vs NP repo](https://github.com/DavidF
 - **Relativization**: specific integer property, not oracle-dependent
 - **Asymptotic**: EutheosAsymptotic.lean proves density 0.47% for all n, prime 211 chain, monotone lift of 9-gate lower bound to all n≥4
 
-## Files (12 Lean files, 17 builds, 15 greens)
+## Files (12 Lean files all compile) 
 
 - `John_6_Three_Miracles_SelfContained.lean` - arithmetic core 1419=31143
 - `SearchSmall.lean` - n=3 zero, n=4 304 functions
