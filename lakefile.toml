@@ -1,0 +1,12 @@
+name = "eutheos-property"
+version = "0.1.0"
+defaultTargets = ["eutheos-property"]
+
+[[lean_lib]]
+name = "EutheosProperty"
+srcDir = "."
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.15.0"
