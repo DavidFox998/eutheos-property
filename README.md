@@ -1,3 +1,6 @@
+![Lean Build](https://github.com/DavidFox998/eutheos-property/actions/workflows/main.yml/badge.svg)
+
+# eutheos-property
 This repo explores barrier-bypassing properties for P vs NP inspired by immediate arrival - properties that are non-constructive, non-large, and non-algebrizing.
 ## Eutheos Property
 
