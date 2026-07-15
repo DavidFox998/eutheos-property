@@ -2,7 +2,6 @@ name: Lean Build
 
 on:
   push:
-    branches: [main]
   pull_request:
 
 jobs:
@@ -10,9 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: leanprover/lean-action@v1
-        with:
-          auto-config: false
-          use-mathlib-cache: true
-          build: true
-          lint: false
+      
+      - name: Install Elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.15.0
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+          echo "$HOME/.elan/bin" >> $HOME/.profile
+      
+      - name: Lake update
+        run: |
+          ~/.elan/bin/lake update
+          
+      - name: Lake build
+        run: |
+          ~/.elan/bin/lake build
