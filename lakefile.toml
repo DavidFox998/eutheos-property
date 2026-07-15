@@ -1,6 +1,5 @@
 name = "eutheos-property"
 version = "0.1.0"
-defaultTargets = ["eutheos-property"]
 
 [[lean_lib]]
 name = "EutheosProperty"
