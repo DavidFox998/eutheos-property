@@ -71,3 +71,9 @@ Language L_1419 = { f | low16(f)=1419 } ∈ NP (witness checkable in poly time) 
 46 workflow runs all green, 0 sorrys, Lean native_decide + Python counting.
 
 John 6:21 εὐθέως = immediately, 1419 - immediately the boat was at the land
+
+Let N = 2^n = size of truth table. Input to language is T (length N).
+
+Define: 
+L_1419 = { T ∈ {0,1}^N | low16(T)=1419 AND for all circuits C with |C|<n², C ≠ T }
+
