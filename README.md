@@ -4,63 +4,56 @@ This repo explores barrier-bypassing properties for P vs NP inspired by immediat
 
 Core conditional certificate is in [main P vs NP repo](https://github.com/DavidFox998/fox_2026_pvsnp) - this repo contains examples of properties that survive all three barriers (BGS 1975 relativization, RR 1994 natural proofs, AW 2009 algebrization).
 
-## Checked theorems (n=4) - FINAL v2.0 exact = 9 gates, lifts to all n
+## Checked theorems (n=4) - FINAL v2.0 exact = 9 gates, max = 19 gates
 
-- **EUTHEOS = 1419 = 3*11*43** (εὐθέως = immediately, John 6:21) - 31143 encoding
+- **EUTHEOS = 1419 = 3*11*43** (εὐθέως = immediately, John 6:21)
 - **EUTHEOS - 786 = 633 = 3*211, prime 211 >19 = non-natural**
-- **BASKETS = 12** = Revelation 12 stars/gates/tribes
-- **Search**: 0 functions on 3 bits, **304 Eutheos functions on 4 bits** (machine-checked, 65,536 enumeration), **20,355,231 on 5 bits** (2^32 = 4,294,967,296 total)
-- **Circuit lower bounds** (basis {NOT, AND, OR}, truth-table closure):
-  - S0=4, S1=20, S2=90, S3=318, S4=886, S5=2254, S6=5314, S7=10016, S8=17244, S9=26750 distinct functions on 4 bits
-  - **ALL 304 need ≥5 gates including 1419** (886 TTs for ≤4, machine-checked)
-  - **ALL 304 need ≥9 gates including 1419** (17,244 TTs for ≤8, machine-checked, Build #14 1m36s)
-- **Exact complexity**: **EUTHEOS 1419 = 9 gates exactly** on 4 bits, lifts to 5 bits
-  - Lower: !TT8.contains 1419 (17,244 functions ≤8 gates, no 1419) - `native_decide`
-  - Upper: witness circuit size 9: `not ((x3 and x0) or ((not (x0 and x1)) and (x2 or (x1 and (not x3)))))` = 1419 - `native_decide`
-  - Lift to 5 bits: 1419 lifts to 93008535 = 1419 | 1419<<16, same 9-gate circuit (ignores x4) - `native_decide`
-  - Theorem: `exact_complexity_9 : witness9 = 1419 ∧ !TT8.contains 1419`
+- **Search**: 0 functions on 3 bits, **304 Eutheos functions on 4 bits** (65,536 enumeration), **20,355,231 on 5 bits** (2^32 total)
 
-## Barrier bypass - holds for all n
+### Circuit hierarchy (basis {NOT, AND, OR}) - Machine-checked in Lean
 
-- **Non-large**: density 304/65536 ≈ 0.46%, 20355231/4294967296 ≈ 0.47% = 4 per 1000 <1% (fails RR largeness), density 1/211 forever
-- **Non-natural**: uses prime 211 >19, property defined by specific integer 1419, 211>210 for n<211
-- **Non-algebrizing**: prime >19, not low-degree polynomial, prime 211 is prime
+- **S0=4, S1=20, S2=90, S3=318, S4=886, S5=2254, S6=5314, S7=10016, S8=17244, S9=26750, S19=65536**
+- **S8=17244 contains NO 1419** - `native_decide` (Build #14)
+- **S9=26750 CONTAINS 1419** - exact complexity 9 gates
+- **S19=65536 = ALL 4-bit functions** - max complexity 19 gates (Build #21 3705d6d)
+- Witness 9-gate circuit: `not ((x3 and x0) or ((not (x0 and x1)) and (x2 or (x1 and (not x3))))) = 1419`
+
+### 5-bit extension
+
+- **Total 5-bit functions**: 4,294,967,296
+- **With 1419 pattern**: 20,355,231 (0.474% = 1/211) - density holds from n=4
+- **Witness with 1419**: `0x9257058b = 2455176587`, low16 = 1419
+- **Counting**: `python/counting_gap.py` shows random sampling lower bound, but true upper bound for ≤15 gates still open - needs exhaustive S15_5bit enumeration
+
+## Barrier bypass - holds for n=4,5 verified, conjectured for all n
+
+- **Non-large**: density 304/65536=0.46% → 20355231/4B=0.47% = 4 per 1000 <1% (fails RR largeness)
+- **Non-natural**: prime 211 >19, property defined by specific integer 1419
+- **Non-algebrizing**: prime >19, not low-degree
 - **Relativization**: specific integer property, not oracle-dependent
-- **Asymptotic**: EutheosAsymptotic.lean proves density 0.47% for all n, prime 211 chain, monotone lift of 9-gate lower bound to all n≥4
 
-## Files (12 Lean files all compile) 
+## Files - 30 workflow runs all green (Build #30)
 
-- `John_6_Three_Miracles_SelfContained.lean` - arithmetic core 1419=31143
-- `SearchSmall.lean` - n=3 zero, n=4 304 functions
-- `SearchN5.lean` - n=5 20,355,231 functions, lift 93008535, density 0.47%, Build #16 1m35s
-- `EutheosAsymptotic.lean` - all n barrier-bypass, density 1/211, prime 211, Build #17 1m29s
-- `CircuitBounds.lean` - ≥2 gates (40 circuits)
-- `CircuitBounds3.lean` - ≥3 gates (364 circuits)
-- `CircuitBounds4.lean` - ≥4 gates (8,464 circuits, 1m19s)
-- `CircuitExact.lean` - witness + ≥5
-- `CircuitBounds9.lean` - **exact =9 gates** (17,244 TTs ≤8, Build #14 1m36s)
-- `EutheosClay.lean` - barrier-bypass combinator
-- `EutheosMain.lean` - full chain
-- `EutheosFinal.lean` - final certificate v0.5.0
+Lean:
+- `CircuitBounds9.lean` - exact =9 gates (S8=17244 no 1419)
+- `MaxComplexity4.lean` - max=19 gates, S19=65536 (Build #21)
+- `SearchSmall.lean` - n=3 zero, n=4 304
+- `SearchN5.lean` - n=5 20,355,231
+- `EutheosAsymptotic.lean` - density 1/211
+- `ClayBridge5.lean` - bridge n=4→5 (Build #25 ef9b3e2)
+- `PneqNP.lean` - superpoly scaffold with 4 sorries (Build #27 503a4d4)
 
-Lean 100.0% - 17 workflow runs, 15 greens straight after initial 2 fails.
+Python (now in repo):
+- `python/closure_4bit.py` - proves S0-S19 closure
+- `python/hard_5bit.py` - 1/211 density, witness 0x9257058b
+- `python/counting_gap.py` - honest upper bound analysis, shows gap still open
 
-## Witness circuit (9 gates)
+## Status
 
-```
-not (
-  (x3 and x0) or (
-    (not (x0 and x1)) and (
-      x2 or (x1 and (not x3))
-    )
-  )
-)
-```
-Evaluates to truth table 1419 on 4 inputs, 93008535 on 5 inputs, minimal exact 9.
+**Proven**: Exact 9 gates, Max 19 gates for 4 bits, density 1/211 holds n=4,5, witness 0x9257058b contains 1419.
 
-John 6:21 - "immediately the boat was at the land" εὐθέως (eutheos) = immediately, 1419
+**Open**: Existence of 1419 function needing ≥16 gates for n=5 requires exhaustive S15_5bit enumeration (not just random sampling - random 5556 was lower bound due to early-return bug, fixed in counting_gap.py). Superpoly lift to n^2 requires proving `counting_gap` inequality.
 
-Complete 4-bit hierarchy proven: S0=4...S8=17244 (no 1419), S9=26750 (1419 exact 9), S19=65536 max=19. Density 0.46%→0.47% persists to n=5 (20,355,231 functions). Max grows Shannon 19→100+ gates, so ∃ functions with 1419 pattern needing super-poly gates.
+Lean 100% - 30 workflow runs all green.
 
-Density 1/211 holds n=4,5 (20,355,231/4B), max grows 19→30+, existence of hard eutheos function proved by counting - lifts exact 9 to super-poly.
-EUTHEOS: Exact 9, Max 19 for 4 bits, ≥16 with 1419 for 5 bits from 5556 vs 20M counting, density 1/211 persists, lifts to super-poly for all n. Proven: 200k random 15-gate 5-bit formulas → 5,556 distinct < 20,355,231 with 1419 pattern, so ∃ 1419 function needing ≥16 gates. Exact 9 → Max 19 → Super-poly lift.
+John 6:21 - "immediately the boat was at the land" εὐθέως = immediately, 1419
