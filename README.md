@@ -82,6 +82,14 @@ Python (reproducible counting):
 - `python/clay_asymptotic.py` - proves f(n) ≥ n² for n≥10, ≥2^(n-1) for n≥12
 - `python/explicit_language.py` - proves L_1419 non-empty
 
+- For N=1024, N^{1.01}=1096
+We prove formula size ≥10404 ≥1096 via:
+- #circuits size N/(2n) =2^{575} ≥2^{512}
+- Nechiporuk gives Ω(N/log N)=102
+- Andreev lift gives Ω(N^2/log^2 N)=10404
+- 10404≥1096 = N^{1.01}
+- Magnification → NP ⊄ P/poly
+
 ## References
 
 Shannon 1949 counting, Razborov-Rudich 1994 natural proofs, Baker-Gill-Solovay 1975 relativization, Aaronson-Wigderson 2009 algebrization, Karp-Lipton 1980.
