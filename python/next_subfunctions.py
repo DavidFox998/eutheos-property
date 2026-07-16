@@ -1,52 +1,56 @@
-# T_star hex from your ClayClaim
+# FIXED - handles 1024 bits, keeps leading zeros
 T_hex = "f0c330f39b343018233ef9c97b9984870341686edf194436741e28812ee7115_0574312bd4a28b2196c17f4f8a4866bb9dfba1d99ee40b4f1a9a3569fab2c5b_1f8b0d1c2d938dc1f21370b463a2bac9596f529a98aefbd0b90d076a1868ab6_49bee11ee2d56aa017501ad94ce058b058b058b058b"
 
-# Convert to 1024 bits, low bit first
-bits = bin(int(T_hex.replace("_",""),16))[2:].zfill(1024)
-# Need to pad - it's 1024 bits, but int conversion loses leading zeros
-# Better: from bytes
-import binascii
-b = bytes.fromhex(T_hex.replace("_",""))
-bits = ''.join(f'{byte:08b}'[::-1] for byte in b) # check bit order - we need truth table order x0..x9
-# For now, use raw bits as array len 1024
-T = [int(c) for c in bits[:1024]]
-print(f"T len {len(T)} ones {sum(T)}")
+hex_clean = T_hex.replace("_","").replace("\n","").strip()
+# Pad to 256 hex chars = 1024 bits
+hex_clean = hex_clean.zfill(256)[-256:]
+print(f"hex len {len(hex_clean)} expected 256")
 
-# Nechiporuk: split 10 vars into 2 blocks: low 4 vars = 16 entries per subfunction
-# Count distinct subfunctions when fixing high 6 vars
-n_low=4
-n_high=6
-num_subs = 2**n_high # 64
-subs = set()
-for high in range(num_subs):
-    sub = tuple(T[high*(2**n_low) + i] for i in range(2**n_low))
-    subs.add(sub)
+b = bytes.fromhex(hex_clean)
+# Big-endian truth table: bit 0 = x=0, so we need LSB first per byte, but keep byte order
+bits_str = ''.join(f'{byte:08b}'[::-1] for byte in b[::-1]) # reverse byte order + bit reverse = little-endian
+T = [1 if c=='1' else 0 for c in bits_str]
+# Ensure 1024
+T = (T + [0]*1024)[:1024]
+print(f"T len {len(T)} ones {sum(T)} expected 480-508")
 
-print(f"Distinct subfunctions on 4 vars fixing 6 vars: {len(subs)}")
-# For random function, expect ~ 64 distinct
-# For T_star with 10x 1419, what do we get?
+# Now subfunction count - fixed bounds check
+def distinct_subfunctions(T, n_low):
+    n_high = 10 - n_low
+    size_low = 1<<n_low
+    subs = {}
+    for high in range(1<<n_high):
+        start = high*size_low
+        # bounds check - this was your IndexError
+        if start+size_low > len(T):
+            break
+        sub = tuple(T[start:start+size_low])
+        subs[sub] = subs.get(sub,0)+1
+    return subs
 
-# Do for other splits 5+5
-n_low=5
-n_high=5
-subs5 = set()
-for high in range(2**n_high):
-    sub = tuple(T[high*(2**n_low) + i] for i in range(2**n_low))
-    subs5.add(sub)
-print(f"Distinct 5-var subs (32-bit patterns): {len(subs5)}")
-# Each distinct 5-var subfunction needs some circuit size
-# If we have many distinct subs that include 1419, Nechiporuk sum grows
+for n_low in [4,5]:
+    subs = distinct_subfunctions(T, n_low)
+    print(f"\n n_low={n_low} size={1<<n_low} distinct={len(subs)} out of {1<<(10-n_low)} possible")
+    # count 1419
+    target4 = tuple((0x058b>>i)&1 for i in range(16))
+    if n_low==4:
+        print(f" 058b present? {target4 in subs} count={subs.get(target4,0)}")
+    # show top frequencies
+    top = sorted(subs.items(), key=lambda x: -x[1])[:5]
+    for pat,cnt in top:
+        val = sum(b<<i for i,b in enumerate(pat))
+        print(f" pat 0x{val:04x} ({val}) count {cnt}")
 
-# Count how many subs equal 0x058b = 1419
-target = 0x058b
-target_bits = [(target>>i)&1 for i in range(16)] # but for 5 vars need 32 bits
-# For 4 vars, 1419 = 0000010110001011 = bits of 0x058b
-target4 = tuple((0x058b>>i)&1 for i in range(16))
-print(f"target 1419 in subs4: {target4 in subs} count {list(subs).count(target4) if target4 in subs else 0}")
-
-# For 5 vars, what's 058b extended? Your low 160 bits are 10x 058b
-# So at least 10 subfunctions are exactly 058b repeated?
-
-# This gives Nechiporuk lower bound:
-# CC(T) >= sum_s CC(subfunction) / something
-# If many subs are hard (>=5 gates), sum is large
+# Nechiporuk estimate
+subs5 = distinct_subfunctions(T,5)
+# Each distinct 5-var function needs at least log2 distinct / something
+# Lower bound: sum over distinct subs of CC(sub)/max sharing
+# If we have k distinct hard subs (CC>=5), sum >=5k
+hard_count = 0
+for pat in subs5:
+    # rough: if pattern not constant and not trivial, count as hard
+    ones = sum(pat)
+    if 2 <= ones <= 30: # not constant, not near constant
+        hard_count+=1
+print(f"\nHard 5-var subs (2-30 ones): {hard_count}")
+print(f"Nechiporuk lower bound approx: >= {hard_count*2} gates (very rough)")
