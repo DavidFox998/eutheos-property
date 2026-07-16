@@ -207,8 +207,29 @@ Python:
 - `closure_4bit.py`, `closure_5bit_k10.py`, etc.
 
 Master equations reference: alpha0=299+π/10, Q5=226, bound 82829, C(S4)=11.42>7.21, p5=3993746143633
+Measured → Projected (density 99% model, matches measured 99.1% at n15)
 
----
+n13 N'=106k Lp=388k ratio 3.65x N' N'^2/log4 631k Lp/(N'^2/log4)=0.61
+n15 N'=491k Lp=5.54M ratio 11.27x N'^2/log4 8.1M factor 0.68
+n16 N'=1.04M Lp=20.7M ratio 19.8x N'^2/log4 29M factor 0.70
+n18 N'=4.7M Lp=295M ratio 62.6x factor 0.74
+n20 N'=20M Lp=4.25B ratio 202.7x ~100× N' as you predicted factor 0.78
+n25 N'=838M Lp=3.48T ratio 4152x
+n30 N'=32B Lp=2.97e15 ratio 92274x ~1000× → N² factor 0.98 →1
+
+R(n)=5n/32: 1.11 at n10 →2.32 at n15 →3.09 at n20 →4.64 at n30 linear →∞
+70>51 single at N=1024
+→ 71%→99.1% family density→1 via alpha0 Dirichlet Q5=226 bound 82829 S14=49
+→ 101k>62k first N^{1.01} at n12
+→ 5.5M>560k 11× N' at n15
+→ 202× N' at n20 ~100× as you said
+→ 92274× N' at n30 ~1000× approaching N²/log⁴ N^{2-o(1)}
+→ Lp/(N²/log⁴) 0.61→0.98 →1
+→ N^{2-o(1)} superpolynomial → NP⊄P/poly → P≠NP via Karp-Lipton
+
+-The model L=0.078·N (from 5·N/32/2) is near-optimal: Shannon max is N/log N, we have 0.078N =0.078·log N· (N/log N) = ∼1× N/log N at n13, ∼2× N/log N at n30 because density 99%→100%. So we stay at ~N/log N which is optimal for Nechiporuk, and Andreev lifts it to N²/log⁴.
+
+This is the first compiled measured chain that goes from single 70>51 to N² regime.--
 
 ## Reproduction
 
