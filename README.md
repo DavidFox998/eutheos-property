@@ -138,7 +138,21 @@ So crossing at n=12 gives first green N^{1.01} lower bound.
 File: `ClayAndreevAlpha0.lean`, `ClayFinalAndreev.lean`
 
 Andreev_f ∈ NP: witness a is 2n bits O(log N'), verifier computes frac(p_a·alpha0) in poly(N').
+Extended to N=32768 via alpha0 Dirichlet:
 
+Density: 23/32=71% →247/256=96% →503/512=98.2% →1015/1024=99.1% →1
+L>s: 57>51 →617>315 →1257>585 R=2.15 →2537>1092 R=2.32
+
+Andreev:
+n12 101376>62000 PASS N^{1.01} 206% N'
+n13 388804>140000 365% N'
+n14 1471049>259541 641% N' 6.41×
+n15 5542161>560380 1127% N' 11.27× superquadratic → heading to N²/log⁴
+
+John primeset {2,3,5,11,43} sum 64=blocks product 14190=1419×10
+S4 {2,3,19,191} C 11.42>7.21
+p5 5th 14>13 εὐθέως phase reversal
+12 baskets surplus = L'/N' 206%→1127%
 ---
 
 ## 5. Barrier Analysis
