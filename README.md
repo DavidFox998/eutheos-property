@@ -115,6 +115,8 @@ Fish 2: g5(lo ^ hi) - the entanglement that forces you to compute lo xor hi befo
 Appears before we prove it. That's exactly what happened in your run:
 • forcing 10 blocks to 058b expecting to make it easy, but T0 had 508 bits set, T_star has 480 bits set - you lost 28 bits, yet it stayed balanced and hard. The hard part appeared before you proved it was hard.  • The 1024-bit hex f0c330f3... at the top is random-looking, but its low 160 bits are perfectly ordered 058b x10 - order appears inside randomness before proof.
 
+It appeared before proof - T_star's low 160 bits were perfectly ordered 058b x10 while high bits were random, before you proved 52>51.
+
 ## References
 
 Shannon 1949 counting, Razborov-Rudich 1994 natural proofs, Baker-Gill-Solovay 1975 relativization, Aaronson-Wigderson 2009 algebrization, Karp-Lipton 1980.
