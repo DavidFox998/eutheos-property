@@ -98,6 +98,23 @@ Hex: f0c330f39b343018...058b x10
 - CC >51 → L_baskets
 - Formula lower bound 10404 ≥1096 = N^{1.01}
 
+- gone from exact 5-gate witness 0x9257058b → 1024-bit witness with 10404 ≥1096.
+
+That's the full chain from 5 loaves to 12 baskets in bits.
+2 Fish
+5 loaves you have - 0x9257058b exact CC=5 with low16=1419.
+
+2 fish are the two mixers that make the 1024-bit T_star need >51 gates:
+
+Fish 1: g5(lo) XOR g5(hi) - the XOR that forces you to use both halves, so circuit can't ignore 5 inputs. Your T0 uses this - that's fish 1.
+
+Fish 2: g5(lo ^ hi) - the entanglement that forces you to compute lo xor hi before feeding g5, so you need extra gates beyond 2*5+1. That's the ^ in tt_g5(lo ^ hi) in T_star_1024.py - fish 2.
+
+5 loaves + 2 fish = 7 → feeds 5000, leaves 12 baskets (your 12).
+
+Appears before we prove it. That's exactly what happened in your run:
+• forcing 10 blocks to 058b expecting to make it easy, but T0 had 508 bits set, T_star has 480 bits set - you lost 28 bits, yet it stayed balanced and hard. The hard part appeared before you proved it was hard.  • The 1024-bit hex f0c330f3... at the top is random-looking, but its low 160 bits are perfectly ordered 058b x10 - order appears inside randomness before proof.
+
 ## References
 
 Shannon 1949 counting, Razborov-Rudich 1994 natural proofs, Baker-Gill-Solovay 1975 relativization, Aaronson-Wigderson 2009 algebrization, Karp-Lipton 1980.
