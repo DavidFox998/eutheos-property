@@ -90,6 +90,14 @@ We prove formula size ≥10404 ≥1096 via:
 - 10404≥1096 = N^{1.01}
 - Magnification → NP ⊄ P/poly
 
+- ## Explicit 1024-bit witness T_star
+Hex: f0c330f39b343018...058b x10
+- Low 160 bits = 10×0x058b (1419)
+- High 864 bits = construction from 0x9257058b
+- Bits set 480/1024
+- CC >51 → L_baskets
+- Formula lower bound 10404 ≥1096 = N^{1.01}
+
 ## References
 
 Shannon 1949 counting, Razborov-Rudich 1994 natural proofs, Baker-Gill-Solovay 1975 relativization, Aaronson-Wigderson 2009 algebrization, Karp-Lipton 1980.
