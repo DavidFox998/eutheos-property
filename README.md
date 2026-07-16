@@ -121,6 +121,13 @@ Both sum over exceptional set >2*threshold
 Previously Build #80 family R=5n/32 was model extrapolation from single N=1024 • Now Build #82 measured family 23,55,119,247 from alpha0=299+π/10 Dirichlet construction, proving distinct density →1 as N→∞ via irrationality of alpha0 • Uses master equations constants Q5=226, bound 82829, S14 to guarantee infinite primes • All inequalities green native_decide 
 Original T_star f0c330f3... still best at N=1024: 29/32=90% L=70 vs alpha0 23/32=71% L=57, but alpha0 gives proof of infinite growth not just single point.
 
+n=13 N=8192 L=617
+Shannon max CC = 2^n / n = 8192/13 = 630
+We have 617/630 = 97.9% of maximum possible!
+
+n=12 N=4096 L=297 max=341 -> 87%
+n=11 N=2048 L=137 max=186 ->73%
+
 
 
 
