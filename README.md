@@ -1,4 +1,4 @@
-# Circuit Lower Bounds via Witness 1419 (0x058b) - Professional Report
+# Circuit Lower Bounds via Witness 1419 (0x058b) 
 
 **Status:** Build 93 CLEAN — zero axiom keyword, zero sorry keyword, all green `native_decide`. Explicit lower bounds proved, P⊆Ppoly concrete via TM tableau, Cook-Levin Tseitin concrete, MMW hypothesis 64>33 green. Full chain P≠NP conditional on MMW magnification (now theorem, not axiom).
 
