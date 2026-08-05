@@ -13,11 +13,10 @@ Single library covering all source directories.
 Files in Archive/ are NOT listed as build targets -- they contain
 sorry/axiom and are kept for historical reference only.
 
-Build individual clean files:
-  lake build Bounds.CircuitBounds9
-  lake build Final.ClayFinalClean
-Build everything clean (CI uses explicit targets in main.yml):
-  lake build
+Slices:
+  Brothers1419  -- 16-bit, popcount=6, 35 brothers (minimal, fastest)
+  Brothers61    -- 16-bit, popcount=8, 61 brothers (342 nines)
+  Brothers188   -- 20-bit, popcount=6, 188 brothers (1026 nines, ~100%)
 -/
 lean_lib EutheosProperty where
   srcDir := "."
@@ -41,5 +40,7 @@ lean_lib EutheosProperty where
     .one `Family.Brothers1419,
     .one `Family.WeylGolden,
     .one `Family.DirichletGolden,
-    .one `Family.EutheosAsymptotic
+    .one `Family.EutheosAsymptotic,
+    .one `Family.Brothers61,
+    .one `Family.Brothers188
   ]
