@@ -29,10 +29,17 @@ jobs:
       - name: "Witness -- ClayClaim_fixed (Nechiporuk 70>51)"
         run: lake build Witness.ClayClaim_fixed
 
-      # -- Family ----------------------------------------------------------------
-      - name: "Family -- Brothers1419 (35 brothers, native_decide)"
+      # -- Family: brother slices ------------------------------------------------
+      - name: "Family -- Brothers1419 (16-bit pop6, 35 brothers, native_decide)"
         run: lake build Family.Brothers1419
 
+      - name: "Family -- Brothers61 (16-bit pop8, 61 brothers, 342 nines)"
+        run: lake build Family.Brothers61
+
+      - name: "Family -- Brothers188 (20-bit pop6, 188 brothers, 1026 nines)"
+        run: lake build Family.Brothers188
+
+      # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- WeylGolden (gaps F7/F8/F9, alpha0 irrational)"
         run: lake build Family.WeylGolden
 
