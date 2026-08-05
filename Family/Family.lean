@@ -1,7 +1,11 @@
 -- Family — infinite explicit family T_star_N via alpha0 = 299+π/10
--- ClayFamilyAlpha0 : alpha0 irrational/transcendental, Q5=226, Q6=165689, Dirichlet bounds
--- EutheosAsymptotic : density table N=1024..134M, 71%→99.999785%, 9 collisions in 4M blocks
--- python/T_star_alpha0.py : generator (mpmath 30 dps)
-
-import Family.ClayFamilyAlpha0
-import Family.EutheosAsymptotic
+--
+-- ClayFamilyAlpha0  : alpha0 irrational/transcendental, Q5=226, Q6=165689,
+--                     Dirichlet bound 82829 green, CF [0;3,5,2,5,1,733...]
+-- EutheosAsymptotic : density table N=1024..134M, 71%→99.999785%,
+--                     R 1.11→4.219, 9 collisions in 4M blocks
+-- python/           : T_star_alpha0.py generator (mpmath 30 dps)
+--
+-- Note: build each file individually — they share top-level definitions
+--   lake build Family.ClayFamilyAlpha0
+--   lake build Family.EutheosAsymptotic

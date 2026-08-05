@@ -1,40 +1,37 @@
 name = "eutheos-property"
 version = "0.1.0"
 
--- Clean build: Bounds → Witness → Family → Andreev → Ppoly → CookLevin → MMW → Final
--- Archive/ is excluded from the build (contains sorry/axiom historical files)
+-- Single library covering all source directories.
+-- Files in Archive/ are NOT listed as build targets — they contain
+-- sorry/axiom and are kept for historical reference only.
+--
+-- Build individual clean files:
+--   lake build Bounds.CircuitBounds9
+--   lake build Final.ClayFinalClean
+-- Build everything clean (CI uses explicit targets in main.yml):
+--   lake build
 
 [[lean_lib]]
-name = "Bounds"
+name = "EutheosProperty"
 srcDir = "."
-
-[[lean_lib]]
-name = "Witness"
-srcDir = "."
-
-[[lean_lib]]
-name = "Family"
-srcDir = "."
-
-[[lean_lib]]
-name = "Andreev"
-srcDir = "."
-
-[[lean_lib]]
-name = "Ppoly"
-srcDir = "."
-
-[[lean_lib]]
-name = "CookLevin"
-srcDir = "."
-
-[[lean_lib]]
-name = "MMW"
-srcDir = "."
-
-[[lean_lib]]
-name = "Final"
-srcDir = "."
+globs = [
+  "Bounds.CircuitBounds9",
+  "Bounds.ClayBridge5_10",
+  "Witness.ClayClaim_fixed",
+  "Family.ClayFamilyAlpha0",
+  "Family.EutheosAsymptotic",
+  "Andreev.ClayAndreevLift",
+  "Andreev.ClayAndreevAlpha0",
+  "Andreev.ClayN20Measured",
+  "Andreev.ClayN25MpmathMeasured",
+  "Andreev.ClayN26MpmathMeasured",
+  "Andreev.ClayN27MpmathMeasured",
+  "Ppoly.ClayPSubPpolyClean",
+  "CookLevin.ClayCookLevinClean",
+  "MMW.ClayMMWClean",
+  "Final.ClayFinalClean",
+  "Final.ClayFinalUnifiedClean",
+]
 
 [[require]]
 name = "mathlib"

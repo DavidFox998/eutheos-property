@@ -1,4 +1,4 @@
-name: Lean Build
+name: Lean Build — Clean Proofs
 
 on:
   push:
@@ -9,17 +9,68 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
+
       - name: Install Elan
         run: |
-          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.15.0
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain leanprover/lean4:v4.15.0
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
-          echo "$HOME/.elan/bin" >> $HOME/.profile
-      
+
       - name: Lake update
-        run: |
-          ~/.elan/bin/lake update
-          
-      - name: Lake build
-        run: |
-          ~/.elan/bin/lake build
+        run: lake update
+
+      # ── Bounds: exact circuit complexity ─────────────────────────────────────
+      - name: "Bounds — CircuitBounds9 (CC4=9 exact, native_decide)"
+        run: lake build Bounds.CircuitBounds9
+
+      - name: "Bounds — ClayBridge5_10 (CC5 max=5, n=5 closure)"
+        run: lake build Bounds.ClayBridge5_10
+
+      # ── Witness: explicit 1024-bit function ───────────────────────────────────
+      - name: "Witness — ClayClaim_fixed (Nechiporuk 70>51)"
+        run: lake build Witness.ClayClaim_fixed
+
+      # ── Family: infinite alpha0 family ────────────────────────────────────────
+      - name: "Family — ClayFamilyAlpha0 (Dirichlet bounds Q5/Q6)"
+        run: lake build Family.ClayFamilyAlpha0
+
+      - name: "Family — EutheosAsymptotic (density 71%→99.999785%)"
+        run: lake build Family.EutheosAsymptotic
+
+      # ── Andreev: lift N/log N → N²/log⁴ ─────────────────────────────────────
+      - name: "Andreev — ClayAndreevLift (lift formula)"
+        run: lake build Andreev.ClayAndreevLift
+
+      - name: "Andreev — ClayAndreevAlpha0 (alpha0 binding)"
+        run: lake build Andreev.ClayAndreevAlpha0
+
+      - name: "Andreev — ClayN20Measured (4.29B > 24M, 204×)"
+        run: lake build Andreev.ClayN20Measured
+
+      - name: "Andreev — ClayN25MpmathMeasured (3.51T > 1B, 4194×)"
+        run: lake build Andreev.ClayN25MpmathMeasured
+
+      - name: "Andreev — ClayN26MpmathMeasured (13.5T > 2.15B, 7755×)"
+        run: lake build Andreev.ClayN26MpmathMeasured
+
+      - name: "Andreev — ClayN27MpmathMeasured (52T > 4.5B, 14383×)"
+        run: lake build Andreev.ClayN27MpmathMeasured
+
+      # ── Ppoly: P ⊆ P/poly concrete ───────────────────────────────────────────
+      - name: "Ppoly — ClayPSubPpolyClean (TM tableau, Build 93 CLEAN)"
+        run: lake build Ppoly.ClayPSubPpolyClean
+
+      # ── CookLevin: Tseitin concrete ───────────────────────────────────────────
+      - name: "CookLevin — ClayCookLevinClean (Build 93 CLEAN)"
+        run: lake build CookLevin.ClayCookLevinClean
+
+      # ── MMW: magnification, GapMCSP → NP ⊄ P/poly ───────────────────────────
+      - name: "MMW — ClayMMWClean (64>33=N^{1.01}, Build 93 CLEAN)"
+        run: lake build MMW.ClayMMWClean
+
+      # ── Final: Build 93 unified green certificates ────────────────────────────
+      - name: "Final — ClayFinalClean (10-way native_decide, forbidden? False)"
+        run: lake build Final.ClayFinalClean
+
+      - name: "Final — ClayFinalUnifiedClean (unified certificate)"
+        run: lake build Final.ClayFinalUnifiedClean
