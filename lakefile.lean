@@ -14,9 +14,10 @@ Files in Archive/ are NOT listed as build targets -- they contain
 sorry/axiom and are kept for historical reference only.
 
 Slices:
-  Brothers1419  -- 16-bit, popcount=6, 35 brothers (minimal, fastest)
-  Brothers61    -- 16-bit, popcount=8, 61 brothers (342 nines)
-  Brothers188   -- 20-bit, popcount=6, 188 brothers (1026 nines, ~100%)
+  Brothers1419    -- 16-bit, popcount=6, 35 brothers (minimal, fastest)
+  Brothers61      -- 16-bit, popcount=8, 61 brothers (342 nines)
+  Brothers188     -- 20-bit, popcount=6, 188 brothers (1026 nines, ~100%)
+  FibonacciChain  -- pure Weyl N=14..90, Three-Gap chain, brothers gap sums
 -/
 lean_lib EutheosProperty where
   srcDir := "."
@@ -42,5 +43,6 @@ lean_lib EutheosProperty where
     .one `Family.DirichletGolden,
     .one `Family.EutheosAsymptotic,
     .one `Family.Brothers61,
-    .one `Family.Brothers188
+    .one `Family.Brothers188,
+    .one `Family.FibonacciChain
   ]
