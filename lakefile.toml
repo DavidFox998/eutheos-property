@@ -31,11 +31,9 @@ globs = [
   "MMW.ClayMMWClean",
   "Final.ClayFinalClean",
   "Final.ClayFinalUnifiedClean",
+  "Family.Brothers1419",
 ]
-lean_lib {
-  name = "Family"
-  globs = #[.submodules "Family"]
-}
+
 [[require]]
 name = "mathlib"
 scope = "leanprover-community"
