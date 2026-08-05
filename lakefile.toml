@@ -32,7 +32,10 @@ globs = [
   "Final.ClayFinalClean",
   "Final.ClayFinalUnifiedClean",
 ]
-
+lean_lib {
+  name = "Family"
+  globs = #[.submodules "Family"]
+}
 [[require]]
 name = "mathlib"
 scope = "leanprover-community"
