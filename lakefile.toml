@@ -1,15 +1,15 @@
 name = "eutheos-property"
 version = "0.1.0"
 
--- Single library covering all source directories.
--- Files in Archive/ are NOT listed as build targets — they contain
--- sorry/axiom and are kept for historical reference only.
---
--- Build individual clean files:
---   lake build Bounds.CircuitBounds9
---   lake build Final.ClayFinalClean
--- Build everything clean (CI uses explicit targets in main.yml):
---   lake build
+# Single library covering all source directories.
+# Files in Archive/ are NOT listed as build targets -- they contain
+# sorry/axiom and are kept for historical reference only.
+#
+# Build individual clean files:
+#   lake build Bounds.CircuitBounds9
+#   lake build Final.ClayFinalClean
+# Build everything clean (CI uses explicit targets in main.yml):
+#   lake build
 
 [[lean_lib]]
 name = "EutheosProperty"
