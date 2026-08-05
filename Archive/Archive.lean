@@ -1,0 +1,3 @@
+-- Archive — historical builds #1–78, files containing sorry or axiom keyword
+-- These are preserved for reference but excluded from the main build.
+-- See README.md for the full proof chain using files in Bounds/..Final/ only.

@@ -1,8 +1,39 @@
 name = "eutheos-property"
 version = "0.1.0"
 
+-- Clean build: Bounds → Witness → Family → Andreev → Ppoly → CookLevin → MMW → Final
+-- Archive/ is excluded from the build (contains sorry/axiom historical files)
+
 [[lean_lib]]
-name = "EutheosProperty"
+name = "Bounds"
+srcDir = "."
+
+[[lean_lib]]
+name = "Witness"
+srcDir = "."
+
+[[lean_lib]]
+name = "Family"
+srcDir = "."
+
+[[lean_lib]]
+name = "Andreev"
+srcDir = "."
+
+[[lean_lib]]
+name = "Ppoly"
+srcDir = "."
+
+[[lean_lib]]
+name = "CookLevin"
+srcDir = "."
+
+[[lean_lib]]
+name = "MMW"
+srcDir = "."
+
+[[lean_lib]]
+name = "Final"
 srcDir = "."
 
 [[require]]

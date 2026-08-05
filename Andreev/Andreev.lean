@@ -1,0 +1,10 @@
+-- Andreev — lift Ω(N/log N) → Ω(N²/log⁴ N), first crossing N^{1.01} at n=12
+-- ClayAndreevLift        : Andreev_f(a,b)=f_a(b), lift formula
+-- ClayAndreevAlpha0      : alpha0 binding for Andreev blocks
+-- ClayN20Measured        : n=20, 4.29B > 24M, 204×
+-- ClayN25MpmathMeasured  : n=25, 3.51T > 1B, 4194×
+-- ClayN26MpmathMeasured  : n=26, 13.5T > 2.15B, 7755×
+-- ClayN27MpmathMeasured  : n=27, 52T > 4.5B, 14383×, 9 collisions only
+
+import Andreev.ClayAndreevLift
+import Andreev.ClayAndreevAlpha0
