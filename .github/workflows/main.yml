@@ -18,31 +18,34 @@ jobs:
       - name: Lake update
         run: lake update
 
-      # -- Bounds: exact circuit complexity -----------------------------------------------
+      # -- Bounds ----------------------------------------------------------------
       - name: "Bounds -- CircuitBounds9 (CC4=9 exact, native_decide)"
         run: lake build Bounds.CircuitBounds9
 
       - name: "Bounds -- ClayBridge5_10 (CC5 max=5, n=5 closure)"
         run: lake build Bounds.ClayBridge5_10
 
-      # -- Witness: explicit 1024-bit function --------------------------------------------
+      # -- Witness ---------------------------------------------------------------
       - name: "Witness -- ClayClaim_fixed (Nechiporuk 70>51)"
         run: lake build Witness.ClayClaim_fixed
 
-      # -- Family: infinite alpha0 family -------------------------------------------------
+      # -- Family ----------------------------------------------------------------
+      - name: "Family -- Brothers1419 (35 brothers, native_decide)"
+        run: lake build Family.Brothers1419
+
+      - name: "Family -- WeylGolden (gaps F7/F8/F9, alpha0 irrational)"
+        run: lake build Family.WeylGolden
+
+      - name: "Family -- DirichletGolden (Q5=226, bound=82829, S14 14 primes)"
+        run: lake build Family.DirichletGolden
+
+      - name: "Family -- EutheosAsymptotic (N=4M collisions=9 density chain)"
+        run: lake build Family.EutheosAsymptotic
+
       - name: "Family -- ClayFamilyAlpha0 (Dirichlet bounds Q5/Q6)"
         run: lake build Family.ClayFamilyAlpha0
 
-      - name: "Family -- EutheosAsymptotic (density 71%->99.999785%)"
-        run: lake build Family.EutheosAsymptotic
-
-      - name: "Family -- Brothers1419 (35 brothers, Fib gaps F7/F8/F9, native_decide)"
-        run: lake build Family.Brothers1419
-
-      - name: "Family -- WeylGolden (rational Part A native_decide; irrational Part B alpha0)"
-        run: lake build Family.WeylGolden
-
-      # -- Andreev: lift N/log N -> N2/log4 -----------------------------------------------
+      # -- Andreev ---------------------------------------------------------------
       - name: "Andreev -- ClayAndreevLift (lift formula)"
         run: lake build Andreev.ClayAndreevLift
 
@@ -61,19 +64,19 @@ jobs:
       - name: "Andreev -- ClayN27MpmathMeasured (52T > 4.5B, 14383x)"
         run: lake build Andreev.ClayN27MpmathMeasured
 
-      # -- Ppoly: P subset P/poly concrete -------------------------------------------------
+      # -- Ppoly -----------------------------------------------------------------
       - name: "Ppoly -- ClayPSubPpolyClean (TM tableau, Build 93 CLEAN)"
         run: lake build Ppoly.ClayPSubPpolyClean
 
-      # -- CookLevin: Tseitin concrete -----------------------------------------------------
+      # -- CookLevin -------------------------------------------------------------
       - name: "CookLevin -- ClayCookLevinClean (Build 93 CLEAN)"
         run: lake build CookLevin.ClayCookLevinClean
 
-      # -- MMW: magnification, GapMCSP -> NP not-subset P/poly ----------------------------
+      # -- MMW -------------------------------------------------------------------
       - name: "MMW -- ClayMMWClean (64>33=N^{1.01}, Build 93 CLEAN)"
         run: lake build MMW.ClayMMWClean
 
-      # -- Final: Build 93 unified green certificates -------------------------------------
+      # -- Final -----------------------------------------------------------------
       - name: "Final -- ClayFinalClean (10-way native_decide, forbidden? False)"
         run: lake build Final.ClayFinalClean
 
