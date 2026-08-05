@@ -18,6 +18,8 @@ Slices:
   Brothers61      -- 16-bit, popcount=8, 61 brothers (342 nines)
   Brothers188     -- 20-bit, popcount=6, 188 brothers (1026 nines, ~100%)
   FibonacciChain  -- pure Weyl N=14..90, Three-Gap chain, brothers gap sums
+  H4Throat        -- H4 Coxeter 600-cell throat, phi convergent error, 3 boundaries
+  H4Tower         -- inflation tower N=56/90/146, Fib gaps, density bounds
 -/
 lean_lib EutheosProperty where
   srcDir := "."
@@ -44,5 +46,7 @@ lean_lib EutheosProperty where
     .one `Family.EutheosAsymptotic,
     .one `Family.Brothers61,
     .one `Family.Brothers188,
-    .one `Family.FibonacciChain
+    .one `Family.FibonacciChain,
+    .one `Family.H4Throat,
+    .one `Family.H4Tower
   ]
