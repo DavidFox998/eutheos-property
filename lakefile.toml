@@ -32,6 +32,7 @@ globs = [
   "Final.ClayFinalClean",
   "Final.ClayFinalUnifiedClean",
   "Family.Brothers1419",
+  "Family.WeylGolden",
 ]
 
 [[require]]
