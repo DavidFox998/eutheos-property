@@ -43,6 +43,12 @@ jobs:
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
         run: lake build Family.FibonacciChain
 
+      - name: "Family -- H4Throat (600-cell throat, phi convergent, 3 boundaries)"
+        run: lake build Family.H4Throat
+
+      - name: "Family -- H4Tower (inflation tower N=56/90/146, Fib gaps, density)"
+        run: lake build Family.H4Tower
+
       - name: "Family -- WeylGolden (gaps F7/F8/F9, alpha0 irrational)"
         run: lake build Family.WeylGolden
 
