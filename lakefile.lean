@@ -39,5 +39,7 @@ lean_lib EutheosProperty where
     .one `Final.ClayFinalClean,
     .one `Final.ClayFinalUnifiedClean,
     .one `Family.Brothers1419,
-    .one `Family.WeylGolden
+    .one `Family.WeylGolden,
+    .one `Family.DirichletGolden,
+    .one `Family.EutheosAsymptotic
   ]
