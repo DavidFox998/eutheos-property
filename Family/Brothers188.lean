@@ -12,13 +12,10 @@ Of these, ≈ 188 satisfy T ≡ 153 mod 211.
 
 Union bound: (9/4M)^188 < 10^-1026
 → density = 1 - 10^-1026, indistinguishable from 100% on any physical device.
-Weyl equidistribution (irrational α0) gives lim_{N→∞} density = 1 exactly.
-
-Note: 1419 ∈ brothers_20_6 since 1419 < 2^20 and it satisfies both conditions.
 -/
 
 def brothers_20_6 : Finset ℕ :=
-  (Finset.range 1048576).filter (fun T => Nat.countOnes T = 6 ∧ T % 211 = 153)
+  (Finset.range 1048576).filter (fun T => popcount T = 6 ∧ T % 211 = 153)
 
 def brothers_188_list : List ℕ :=
   [1419, 1841, 2474, 4584, 5428, 5639, 6694, 9648, 9859, 10914,
@@ -46,8 +43,7 @@ theorem brothers_188_contains_1419 : 1419 ∈ brothers_20_6 := by native_decide
 theorem brothers_188_eq_list :
     brothers_20_6.sort (· ≤ ·) = brothers_188_list := by native_decide
 
--- Union bound certifiable sentence
--- 9 / 4000000^10 ≈ 9×10^-66 < 10^-50; a conservative but norm_num-friendly bound
+-- Union bound: 9 / 4000000^10 < 1e-50
 theorem density_188 : (9 : ℝ) / 4000000 ^ 10 < 1e-50 := by norm_num
 
 end Eutheos
