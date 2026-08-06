@@ -46,6 +46,9 @@ jobs:
       - name: "Family -- ExceptionalPrimes (desert {2,3,19,191,p5}, mod-191 injective)"
         run: lake build Family.ExceptionalPrimes
 
+      - name: "Family -- TwinPrimes (twin-pair filter counts, mod-191/193 injective)"
+        run: lake build Family.TwinPrimes
+
       # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
         run: lake build Family.FibonacciChain
