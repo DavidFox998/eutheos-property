@@ -18,7 +18,7 @@ Note: 1419 ∈ brothers_20_6 since 1419 < 2^20 and it satisfies both conditions.
 -/
 
 def brothers_20_6 : Finset ℕ :=
-  (Finset.range 1048576).filter (fun T => T.popcount = 6 ∧ T % 211 = 153)
+  (Finset.range 1048576).filter (fun T => Nat.countOnes T = 6 ∧ T % 211 = 153)
 
 def brothers_188_list : List ℕ :=
   [1419, 1841, 2474, 4584, 5428, 5639, 6694, 9648, 9859, 10914,
