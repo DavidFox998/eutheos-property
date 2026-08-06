@@ -72,6 +72,10 @@ jobs:
       - name: "Family -- PiIrrational (pi certified, aperiodic spread witness)"
         run: lake build Family.PiIrrational
 
+      # -- Protocol --------------------------------------------------------------
+      - name: "Protocol -- SuperBric (MORNINGSTAR_1419, 0 sorry, classical trio)"
+        run: lake build Protocol.SuperBric
+
       # -- Andreev ---------------------------------------------------------------
       - name: "Andreev -- ClayAndreevLift (lift formula)"
         run: lake build Andreev.ClayAndreevLift
