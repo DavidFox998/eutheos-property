@@ -1,4 +1,6 @@
 import Mathlib.Data.Finset.Card
+import Mathlib.Data.Rat.Basic
+import Mathlib.Tactic.NormNum
 
 namespace Eutheos
 
