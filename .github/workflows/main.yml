@@ -37,7 +37,7 @@ jobs:
       - name: "Family -- Brothers61 (16-bit pop8, 61 brothers, 342 nines)"
         run: lake build Family.Brothers61
 
-      - name: "Family -- Brothers188 (20-bit pop6, 188 brothers, 1026 nines)"
+      - name: "Family -- Brothers188 (20-bit pop8, 188 brothers, 1026 nines)"
         run: lake build Family.Brothers188
 
       - name: "Family -- ClayBrothersClean (union bound 35 brothers, L_GapMCSP=2240>33)"
@@ -46,8 +46,11 @@ jobs:
       - name: "Family -- ExceptionalPrimes (desert {2,3,19,191,p5}, mod-191 injective)"
         run: lake build Family.ExceptionalPrimes
 
-      - name: "Family -- TwinPrimes (twin-pair filter counts, mod-191/193 injective)"
+      - name: "Family -- TwinPrimes (twin-pair filter counts, mod-191/193 Nodup)"
         run: lake build Family.TwinPrimes
+
+      - name: "Family -- GapHamming (residue gap > 0, min Hamming ≥ 2)"
+        run: lake build Family.GapHamming
 
       # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
