@@ -12,7 +12,8 @@ jobs:
 
       - name: Install Elan
         run: |
-          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh             | sh -s -- -y --default-toolchain leanprover/lean4:v4.15.0
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain leanprover/lean4:v4.15.0
           echo "$HOME/.elan/bin" >> $GITHUB_PATH
 
       - name: Lake update
@@ -30,7 +31,7 @@ jobs:
         run: lake build Witness.ClayClaim_fixed
 
       # -- Family: brother slices ------------------------------------------------
-      - name: "Family -- Brothers1419 (16-bit pop6, 35 brothers, Nat.countOnes)"
+      - name: "Family -- Brothers1419 (16-bit pop6, 35 brothers)"
         run: lake build Family.Brothers1419
 
       - name: "Family -- Brothers61 (16-bit pop8, 61 brothers, 342 nines)"
@@ -63,6 +64,13 @@ jobs:
 
       - name: "Family -- ClayFamilyAlpha0 (Dirichlet bounds Q5/Q6)"
         run: lake build Family.ClayFamilyAlpha0
+
+      # -- Family: EMI + pi irrationality ----------------------------------------
+      - name: "Family -- DirichletJitterTime (EMI jitter 1420 slices, -30.8dB)"
+        run: lake build Family.DirichletJitterTime
+
+      - name: "Family -- PiIrrational (pi certified, aperiodic spread witness)"
+        run: lake build Family.PiIrrational
 
       # -- Andreev ---------------------------------------------------------------
       - name: "Andreev -- ClayAndreevLift (lift formula)"
