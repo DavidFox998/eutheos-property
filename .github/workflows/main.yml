@@ -61,6 +61,9 @@ jobs:
       - name: "Family -- BrothersAnalysis (Nodup, popcount-6, 3 primes, leader=1419)"
         run: lake build Family.BrothersAnalysis
 
+      - name: "Family -- AlphaBridge (pi trapped 10-decimal, |alpha0_rat - pi/10| < 6e-11)"
+        run: lake build Family.AlphaBridge
+
       # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
         run: lake build Family.FibonacciChain
