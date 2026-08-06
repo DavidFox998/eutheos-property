@@ -67,6 +67,9 @@ jobs:
       - name: "Family -- IrrationalVsRational (pi/10 irrational, dist>0 for all n, desert)"
         run: lake build Family.IrrationalVsRational
 
+      - name: "Family -- AIZ (35 slots, gate norm=1, hop Nodup ≤1419, packet desert, route unitary)"
+        run: lake build Family.AIZ
+
       # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
         run: lake build Family.FibonacciChain
