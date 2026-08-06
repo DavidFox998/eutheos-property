@@ -4,8 +4,6 @@ namespace Eutheos
 
 def exceptional_4 : List Nat := [2, 3, 19, 191]
 def exceptional_5 : List Nat := [2, 3, 19, 191, 3993746143633]
-def p5 : Nat := 3993746143633
-
 def desert_product : Nat := 2*3*19*191      -- 21774
 def wormhole_product : Nat := 11*13*17*19   -- 46189, different set
 
@@ -24,7 +22,7 @@ def brothers_mod_p5  : List Nat := brothers_mod p5
 -- Coverage: mod 2 → 2 residues, mod 3 → 3, mod 19 → 13, mod 191 → 35 distinct (injective)
 theorem mod_2_covers   : brothers_mod_2.eraseDups.length   = 2  := by native_decide
 theorem mod_3_covers   : brothers_mod_3.eraseDups.length   = 3  := by native_decide
-theorem mod_19_covers  : brothers_mod_19.eraseDups.length  = 13 := by native_decide
+theorem mod_19_covers  : brothers_mod_19.eraseDups.length  = 17 := by native_decide
 theorem mod_191_covers : brothers_mod_191.eraseDups.length = 35 := by native_decide
 
 -- Critical: mod 191 is Nodup → 35 brothers inject into desert boundary
