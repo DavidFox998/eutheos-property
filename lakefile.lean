@@ -23,6 +23,7 @@ lean_lib EutheosProperty where
     .one `Family.HilbertRoute,
     .one `Family.PrimesInPi,
     .one `Family.BrothersAnalysis,
+    .one `Family.AlphaBridge,
     .one `Family.WeylGolden,
     .one `Family.DirichletGolden,
     .one `Family.EutheosAsymptotic,
