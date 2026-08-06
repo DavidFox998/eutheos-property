@@ -52,6 +52,9 @@ jobs:
       - name: "Family -- GapHamming (residue gap > 0, min Hamming ≥ 2)"
         run: lake build Family.GapHamming
 
+      - name: "Family -- HilbertRoute (gate ‖·‖=1, route unitary, jitter Nodup, EMI dB)"
+        run: lake build Family.HilbertRoute
+
       # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
         run: lake build Family.FibonacciChain
