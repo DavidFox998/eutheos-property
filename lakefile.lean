@@ -25,6 +25,7 @@ lean_lib EutheosProperty where
     .one `Family.BrothersAnalysis,
     .one `Family.AlphaBridge,
     .one `Family.IrrationalVsRational,
+    .one `Family.AIZ,
     .one `Family.WeylGolden,
     .one `Family.DirichletGolden,
     .one `Family.EutheosAsymptotic,
