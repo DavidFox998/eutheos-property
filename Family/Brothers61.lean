@@ -5,7 +5,7 @@ namespace Eutheos
 /-!
 # Family.Brothers61
 
-Weight-8 slice: Nat.countOnes T = 8, T ≡ 153 mod 211, T ∈ [0, 2^16).
+Weight-8 slice: popcount T = 8, T ≡ 153 mod 211, T ∈ [0, 2^16).
 Gives 61 brothers instead of 35.
 
 Union bound: P(collision ≤ 1 brother) = 9/4M
@@ -14,7 +14,7 @@ P(any collision, 61 brothers) ≤ (9/4M)^61 ≈ 10^-342
 -/
 
 def brothers_of_153_pop8 : Finset ℕ :=
-  (Finset.range 65536).filter (fun T => Nat.countOnes T = 8 ∧ T % 211 = 153)
+  (Finset.range 65536).filter (fun T => popcount T = 8 ∧ T % 211 = 153)
 
 def brothers_61_list : List ℕ :=
   [2685, 3318, 4795, 5850, 7116, 7538, 9015, 9437, 10070, 10492,
@@ -29,12 +29,9 @@ theorem brothers_61_card : brothers_of_153_pop8.card = 61 := by native_decide
 theorem brothers_61_eq_list :
     brothers_of_153_pop8.sort (· ≤ ·) = brothers_61_list := by native_decide
 
--- Union bound certifiable sentence
--- (9/4000000)^61 < 10^-342; weaker but norm_num-friendly form:
--- 9 / 4000000^61 < 1e-300  (9/4000000^61 ≈ 2.2×10^-405)
+-- Union bound: (9/4000000)^61 < 10^-342; conservative norm_num form:
 theorem density_61 : (9 : ℝ) / 4000000 ^ 61 < 1e-300 := by norm_num
 
--- Coprimality still holds: same circle, same permutation property
 theorem coprime_61 : Nat.Coprime 610 987 := by native_decide
 
 end Eutheos
