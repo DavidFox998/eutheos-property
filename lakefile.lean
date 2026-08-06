@@ -21,6 +21,8 @@ lean_lib EutheosProperty where
     .one `Family.TwinPrimes,
     .one `Family.GapHamming,
     .one `Family.HilbertRoute,
+    .one `Family.PrimesInPi,
+    .one `Family.BrothersAnalysis,
     .one `Family.WeylGolden,
     .one `Family.DirichletGolden,
     .one `Family.EutheosAsymptotic,
