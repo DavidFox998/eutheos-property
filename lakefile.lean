@@ -18,6 +18,7 @@ lean_lib EutheosProperty where
     .one `Family.Brothers188,
     .one `Family.ClayBrothersClean,
     .one `Family.ExceptionalPrimes,
+    .one `Family.TwinPrimes,
     .one `Family.WeylGolden,
     .one `Family.DirichletGolden,
     .one `Family.EutheosAsymptotic,
