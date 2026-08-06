@@ -30,7 +30,7 @@ jobs:
         run: lake build Witness.ClayClaim_fixed
 
       # -- Family: brother slices ------------------------------------------------
-      - name: "Family -- Brothers1419 (16-bit pop6, 35 brothers)"
+      - name: "Family -- Brothers1419 (16-bit pop6, 35 brothers, Nat.countOnes)"
         run: lake build Family.Brothers1419
 
       - name: "Family -- Brothers61 (16-bit pop8, 61 brothers, 342 nines)"
@@ -38,6 +38,9 @@ jobs:
 
       - name: "Family -- Brothers188 (20-bit pop6, 188 brothers, 1026 nines)"
         run: lake build Family.Brothers188
+
+      - name: "Family -- ClayBrothersClean (union bound 35 brothers, L_GapMCSP=2240>33)"
+        run: lake build Family.ClayBrothersClean
 
       # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
