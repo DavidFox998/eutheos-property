@@ -14,12 +14,13 @@ Files in Archive/ are NOT listed as build targets -- they contain
 sorry/axiom and are kept for historical reference only.
 
 Slices:
-  Brothers1419    -- 16-bit, popcount=6, 35 brothers (minimal, fastest)
-  Brothers61      -- 16-bit, popcount=8, 61 brothers (342 nines)
-  Brothers188     -- 20-bit, popcount=6, 188 brothers (1026 nines, ~100%)
-  FibonacciChain  -- pure Weyl N=14..90, Three-Gap chain, brothers gap sums
-  H4Throat        -- H4 Coxeter 600-cell throat, phi convergent error, 3 boundaries
-  H4Tower         -- inflation tower N=56/90/146, Fib gaps, density bounds
+  Brothers1419      -- 16-bit, popcount=6, 35 brothers (minimal, fastest)
+  Brothers61        -- 16-bit, popcount=8, 61 brothers (342 nines)
+  Brothers188       -- 20-bit, popcount=6, 188 brothers (1026 nines, ~100%)
+  ClayBrothersClean -- union bound shortcut, L_GapMCSP=2240>33, no mpmath
+  FibonacciChain    -- pure Weyl N=14..90, Three-Gap chain, brothers gap sums
+  H4Throat          -- H4 Coxeter 600-cell throat, phi convergent error, 3 boundaries
+  H4Tower           -- inflation tower N=56/90/146, Fib gaps, density bounds
 -/
 lean_lib EutheosProperty where
   srcDir := "."
@@ -27,8 +28,17 @@ lean_lib EutheosProperty where
     .one `Bounds.CircuitBounds9,
     .one `Bounds.ClayBridge5_10,
     .one `Witness.ClayClaim_fixed,
-    .one `Family.ClayFamilyAlpha0,
+    .one `Family.Brothers1419,
+    .one `Family.Brothers61,
+    .one `Family.Brothers188,
+    .one `Family.ClayBrothersClean,
+    .one `Family.WeylGolden,
+    .one `Family.DirichletGolden,
     .one `Family.EutheosAsymptotic,
+    .one `Family.ClayFamilyAlpha0,
+    .one `Family.FibonacciChain,
+    .one `Family.H4Throat,
+    .one `Family.H4Tower,
     .one `Andreev.ClayAndreevLift,
     .one `Andreev.ClayAndreevAlpha0,
     .one `Andreev.ClayN20Measured,
@@ -39,14 +49,5 @@ lean_lib EutheosProperty where
     .one `CookLevin.ClayCookLevinClean,
     .one `MMW.ClayMMWClean,
     .one `Final.ClayFinalClean,
-    .one `Final.ClayFinalUnifiedClean,
-    .one `Family.Brothers1419,
-    .one `Family.WeylGolden,
-    .one `Family.DirichletGolden,
-    .one `Family.EutheosAsymptotic,
-    .one `Family.Brothers61,
-    .one `Family.Brothers188,
-    .one `Family.FibonacciChain,
-    .one `Family.H4Throat,
-    .one `Family.H4Tower
+    .one `Final.ClayFinalUnifiedClean
   ]
