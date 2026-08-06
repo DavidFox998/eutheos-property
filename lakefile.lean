@@ -26,6 +26,7 @@ lean_lib EutheosProperty where
     .one `Family.H4Tower,
     .one `Family.DirichletJitterTime,
     .one `Family.PiIrrational,
+    .one `Protocol.SuperBric,
     .one `Andreev.ClayAndreevLift,
     .one `Andreev.ClayAndreevAlpha0,
     .one `Andreev.ClayN20Measured,
