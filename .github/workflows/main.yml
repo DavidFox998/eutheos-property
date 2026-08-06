@@ -43,6 +43,9 @@ jobs:
       - name: "Family -- ClayBrothersClean (union bound 35 brothers, L_GapMCSP=2240>33)"
         run: lake build Family.ClayBrothersClean
 
+      - name: "Family -- ExceptionalPrimes (desert {2,3,19,191,p5}, mod-191 injective)"
+        run: lake build Family.ExceptionalPrimes
+
       # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
         run: lake build Family.FibonacciChain
