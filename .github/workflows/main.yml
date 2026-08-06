@@ -55,6 +55,12 @@ jobs:
       - name: "Family -- HilbertRoute (gate ‖·‖=1, route unitary, jitter Nodup, EMI dB)"
         run: lake build Family.HilbertRoute
 
+      - name: "Family -- PrimesInPi (exceptional set S4, desert empty 192..1000, p5 prime)"
+        run: lake build Family.PrimesInPi
+
+      - name: "Family -- BrothersAnalysis (Nodup, popcount-6, 3 primes, leader=1419)"
+        run: lake build Family.BrothersAnalysis
+
       # -- Family: Weyl + Dirichlet chain ----------------------------------------
       - name: "Family -- FibonacciChain (pure Weyl N=14..90, Three-Gap theorem)"
         run: lake build Family.FibonacciChain
