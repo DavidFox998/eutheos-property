@@ -5,7 +5,7 @@ namespace Eutheos
 /-!
 # Family.Brothers61
 
-Weight-8 slice: popcount = 8, T ≡ 153 mod 211, T ∈ [0, 2^16).
+Weight-8 slice: Nat.countOnes T = 8, T ≡ 153 mod 211, T ∈ [0, 2^16).
 Gives 61 brothers instead of 35.
 
 Union bound: P(collision ≤ 1 brother) = 9/4M
@@ -14,7 +14,7 @@ P(any collision, 61 brothers) ≤ (9/4M)^61 ≈ 10^-342
 -/
 
 def brothers_of_153_pop8 : Finset ℕ :=
-  (Finset.range 65536).filter (fun T => T.popcount = 8 ∧ T % 211 = 153)
+  (Finset.range 65536).filter (fun T => Nat.countOnes T = 8 ∧ T % 211 = 153)
 
 def brothers_61_list : List ℕ :=
   [2685, 3318, 4795, 5850, 7116, 7538, 9015, 9437, 10070, 10492,
