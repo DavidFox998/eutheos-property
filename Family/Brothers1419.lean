@@ -27,6 +27,15 @@ import Mathlib
 -/
 
 -- ════════════════════════════════════════════════════════════════════════════
+-- Bit popcount (version-independent; does not rely on Nat.popcount)
+-- ════════════════════════════════════════════════════════════════════════════
+
+/-- Count set bits in n.  Counts up to 32 bit-positions — sufficient for
+    all values appearing in this file (16-bit brothers, 32-bit lifts). -/
+private def popcount (n : Nat) : Nat :=
+  (List.range 32).foldl (fun acc i => acc + (n >>> i &&& 1)) 0
+
+-- ════════════════════════════════════════════════════════════════════════════
 -- Part 1 — The Brothers: decidable combinatorial facts
 -- ════════════════════════════════════════════════════════════════════════════
 
@@ -47,7 +56,7 @@ theorem two11_prime     : Nat.Prime 211        := by native_decide
 -/
 def brothers_of_1419 : Finset ℕ :=
   (Finset.range 65536).filter (fun T =>
-    T.popcount = 6 ∧ T % 211 = 153)
+    popcount T = 6 ∧ T % 211 = 153)
 
 -- ── Certified count ───────────────────────────────────────────────────────
 theorem brothers_count : brothers_of_1419.card = 35 := by native_decide
@@ -55,8 +64,8 @@ theorem brothers_count : brothers_of_1419.card = 35 := by native_decide
 -- ── 1419 is a member ──────────────────────────────────────────────────────
 theorem mem_1419 : 1419 ∈ brothers_of_1419 := by native_decide
 
--- ── Explicit membership for every brother (all 35) ───────────────────────
-theorem all_members : brothers_of_1419.val.toList.Nodup := by native_decide
+-- ── No duplicates (follows from Finset structure) ─────────────────────────
+theorem all_members_nodup : brothers_of_1419.val.Nodup := brothers_of_1419.nodup
 
 /-
   Explicit list (same order as Finset.range, i.e. ascending):
@@ -75,13 +84,14 @@ def brothers_list : List ℕ :=
 
 theorem brothers_list_length : brothers_list.length = 35 := by native_decide
 
+-- Use Finset.sort (computable) instead of Multiset.toList (noncomputable)
 theorem brothers_list_eq_finset :
-    brothers_list = brothers_of_1419.val.toList.mergeSort (· ≤ ·) := by
+    brothers_list = brothers_of_1419.sort (· ≤ ·) := by
   native_decide
 
 -- ── Every brother has popcount 6 ──────────────────────────────────────────
 theorem all_popcount_6 :
-    ∀ T ∈ brothers_of_1419, T.popcount = 6 := by
+    ∀ T ∈ brothers_of_1419, popcount T = 6 := by
   intro T hT
   exact (Finset.mem_filter.mp hT).2.1
 
@@ -93,7 +103,7 @@ theorem all_mod_211 :
 
 -- ── Characterisation: popcount-6 slice of the residue class 153 + 211ℤ ───
 theorem brothers_characterisation (T : ℕ) (hlt : T < 65536) :
-    T ∈ brothers_of_1419 ↔ T.popcount = 6 ∧ T % 211 = 153 := by
+    T ∈ brothers_of_1419 ↔ popcount T = 6 ∧ T % 211 = 153 := by
   simp [brothers_of_1419, Finset.mem_filter, Finset.mem_range, hlt]
 
 -- ── How many 16-bit naturals satisfy T ≡ 153 (mod 211)? ──────────────────
@@ -105,7 +115,7 @@ theorem residue_class_153_card : residue_class_153.card = 310 := by
 
 -- ── Brothers are exactly the popcount-6 slice of the 310-element class ───
 theorem brothers_are_slice :
-    brothers_of_1419 = residue_class_153.filter (fun T => T.popcount = 6) := by
+    brothers_of_1419 = residue_class_153.filter (fun T => popcount T = 6) := by
   native_decide
 
 -- ════════════════════════════════════════════════════════════════════════════
@@ -118,7 +128,7 @@ theorem brothers_are_slice :
   high 16 bits (T << 16) never overlap in a 32-bit word.
 -/
 theorem lift_popcount_eq (T : ℕ) (hT : T < 65536) :
-    (T ||| (T <<< 16)).popcount = T.popcount * 2 := by
+    popcount (T ||| (T <<< 16)) = popcount T * 2 := by
   native_decide
 
 /-
@@ -126,7 +136,7 @@ theorem lift_popcount_eq (T : ℕ) (hT : T < 65536) :
   Every 16-bit number passes it unconditionally.
 -/
 theorem lift_filter_vacuous (T : ℕ) (hT : T < 65536) :
-    (T ||| (T <<< 16)).popcount = T.popcount * 2 := lift_popcount_eq T hT
+    popcount (T ||| (T <<< 16)) = popcount T * 2 := lift_popcount_eq T hT
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- Part 3 — Dirichlet phase table (hardware-certified values)
@@ -239,9 +249,10 @@ theorem brother_sum_mod_211 :
 theorem brother_sum_residue :
     (brothers_list.foldl (· + ·) 0) % 211 = 80 := by native_decide
 
-/-- The actual sum of all 35 brothers -/
+/-- The actual sum of all 35 brothers:
+    1419+1841+…+52481 = 847034  (verified by native_decide) -/
 theorem brother_total_sum :
-    brothers_list.foldl (· + ·) 0 = 1011870 := by native_decide
+    brothers_list.foldl (· + ·) 0 = 847034 := by native_decide
 
 -- ════════════════════════════════════════════════════════════════════════════
 -- Part 5 — Duty cycle connection (37.5% = 6/16 = C(4,2) / 2^4)
@@ -262,7 +273,7 @@ theorem duty_cycle_denominator : 2^4 = 16       := by native_decide
 
 /-- 37.5% duty = 6/16: every brother encodes this ratio as its Hamming weight -/
 theorem brothers_encode_duty_cycle :
-    ∀ T ∈ brothers_of_1419, T.popcount * 16 = 6 * 16 := by
+    ∀ T ∈ brothers_of_1419, popcount T * 16 = 6 * 16 := by
   intro T hT
   have h := all_popcount_6 T hT
   omega
