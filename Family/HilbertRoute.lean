@@ -1,4 +1,4 @@
-import Mathlib.Analysis.Complex.Exponential
+import Mathlib.Analysis.SpecialFunctions.ExpDeriv
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Family.Brothers1419
 
