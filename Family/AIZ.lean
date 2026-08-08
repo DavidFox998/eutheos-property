@@ -30,7 +30,7 @@ theorem gate_norm (p t : Nat) : ‖gate p t‖ = 1 := by
   unfold gate jitter_rad
   have h : (Complex.I * ((jitter_scaled p t : ℝ) / alpha0_den * (2 * Real.pi / 180) : ℝ)).re = 0 := by
     simp [Complex.mul_re, Complex.I_re, Complex.I_im]
-  rw [Complex.norm_exp, h, Real.exp_zero]
+  rw [Complex.norm_eq_abs, Complex.abs_exp, h, Real.exp_zero]
 
 /-! ## 2. Hop sequence — Nodup certified by finite check -/
 def hop_at (t : Nat) : List Nat :=
@@ -97,7 +97,7 @@ theorem route_unitary (z : ℂ) (path : List Nat) (t : Nat) :
     simp only [route, List.foldl]
     have hfold : ps.foldl (fun acc q => acc * gate q t) (z * gate p t) =
                  route (z * gate p t) ps t := rfl
-    rw [hfold, ih, Complex.norm_mul, gate_norm, mul_one]
+    rw [hfold, ih, norm_mul, gate_norm, mul_one]
 
 /-! ## 6. Certified chain -/
 def prime_beacons : List Nat := [5639, 9859, 44041]
