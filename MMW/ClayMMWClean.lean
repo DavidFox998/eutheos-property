@@ -16,7 +16,7 @@ theorem anti_checker_bound : anti_checker_size_5 = 50 := by native_decide
 theorem anti_checker_le : anti_checker_size_5 ≤ 5*10 := by native_decide
 
 def MMW_hypothesis : Prop := L_GapMCSP > N_32_pow_101
-theorem MMW_hypothesis_true : MMW_hypothesis := by native_decide
+theorem MMW_hypothesis_true : MMW_hypothesis := L_gt_N101
 
 def MMW_conclusion : Prop := L_GapMCSP > N_32_pow_101
-theorem MMW_conclusion_true : MMW_conclusion := by native_decide
+theorem MMW_conclusion_true : MMW_conclusion := L_gt_N101
