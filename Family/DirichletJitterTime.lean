@@ -1,5 +1,7 @@
 import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Data.Nat.GCD.Basic
+import Mathlib.Data.Real.Irrational
+import Mathlib.Data.Real.Pi.Irrational
 
 namespace Eutheos
 
@@ -44,7 +46,7 @@ theorem emi_reduction_db : (20 : ℝ) * Real.log (1 / 35) / Real.log 10 < -30 :=
   have h6 : Real.log (1000 : ℝ) = 3 * Real.log 10 := by
     rw [show (1000 : ℝ) = 10 ^ 3 from by norm_num, Real.log_pow]; ring
   have h7 : 3 * Real.log 10 < 2 * Real.log 35 := by linarith
-  rw [h1, div_lt_iff h2]; linarith
+  rw [h1, div_lt_iff₀ h2]; linarith
 
 /-! α0 = 299 + π/10 is irrational (Mathlib’s Real.pi_irrational). -/
 theorem alpha0_irrational : Irrational (299 + Real.pi / 10) :=
