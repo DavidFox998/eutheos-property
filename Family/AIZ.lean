@@ -1,5 +1,5 @@
 import Mathlib.Data.Complex.Basic
-import Mathlib.Analysis.Complex.Exponential
+-- (Complex.exp / norm_exp available via transitive import of Family.Brothers1419 → Mathlib)
 import Family.Brothers1419
 
 namespace Eutheos.AIZ
