@@ -48,9 +48,16 @@ theorem emi_reduction_db : (20 : ℝ) * Real.log (1 / 35) / Real.log 10 < -30 :=
   have h7 : 3 * Real.log 10 < 2 * Real.log 35 := by linarith
   rw [h1, div_lt_iff₀ h2]; linarith
 
-/-! α0 = 299 + π/10 is irrational (Mathlib’s Real.pi_irrational). -/
-theorem alpha0_irrational : Irrational (299 + Real.pi / 10) :=
-  Irrational.add_int 299 (Real.pi_irrational.div_int (by norm_num))
+/-! α0 = 299 + π/10 is irrational (Mathlib: irrational_pi). -/
+    theorem alpha0_irrational : Irrational (299 + Real.pi / 10) := by
+    have hπ : Irrational Real.pi := irrational_pi
+    have hπ10 : Irrational (Real.pi / 10) := by
+      intro ⟨q, hq⟩
+      apply hπ
+      exact ⟨q * 10, by have := hq; field_simp at this ⊢; linarith⟩
+    intro ⟨q, hq⟩
+    apply hπ10
+    exact ⟨q - 299, by have := hq; push_cast at this ⊢; linarith⟩
 
 def MAX_COMPUTE_MS  : Nat := 6 + 6 + 5 + 20 + 49 + 60 + 82  -- 228
 def MAX_MORNINGSTAR_MS : Nat := 1419
