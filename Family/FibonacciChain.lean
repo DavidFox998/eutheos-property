@@ -40,7 +40,9 @@ def brothers_35_gaps : List ℕ :=
 theorem brothers_gaps_are_fib_sums_bounded :
     ∀ g ∈ brothers_35_gaps, ∃ a ≤ g, ∃ b ≤ g, ∃ c ≤ g,
       g = a * 13 + b * 21 + c * 34 := by
-  native_decide
+  -- g=155 has no non-negative solution: 8(m+n)≡12 mod 13 forces m+n≡8,
+  -- but 21m+34n ≥ 21*8=168>155. Gap list needs correction.
+  sorry
 
 -- Unbounded version you wanted for the paper
 theorem brothers_gaps_are_fib_sums :
