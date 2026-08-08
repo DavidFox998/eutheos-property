@@ -49,7 +49,8 @@ theorem asymptotic_density_tends_to_one :
   use 100000
   intro n hn
   have hpos : 0 < n := by omega
-  have h_eq : n = n / 1000 * 1000 + n % 1000 := (Nat.div_add_mod n 1000).symm
+  have h_eq : n = n / 1000 * 1000 + n % 1000 := by
+    have := Nat.div_add_mod n 1000; omega
   have h_ge : (n - n / 1000) * 100 ≥ 99 * n := by
     have h1 : n - n / 1000 = n / 1000 * 999 + n % 1000 := by omega
     calc (n - n / 1000) * 100 = (n / 1000 * 999 + n % 1000) * 100 := by rw [h1]
@@ -82,7 +83,7 @@ theorem asymptotic_density_forall_eps :
       omega
     exact (Nat.le_div_iff_mul_le hpos).mpr h_ge
   · have h_zero : 100 - eps = 0 := by omega
-    simp [h_zero]
+    simp only [h_zero, ge_iff_le, Nat.zero_le]
 
 theorem certified_full_chain :
     N_blocks = 4000000 ∧
