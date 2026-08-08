@@ -1,31 +1,13 @@
+import Mathlib.Data.Real.Basic
 import Mathlib.Data.Finset.Card
+import Mathlib.Tactic.NormNum
 
 namespace Eutheos
 
-/-!
-# Family.H4Tower
-
-H4 inflation tower using the next Fibonacci convergent 1597/2584 = F₁₇/F₁₈.
-
-Each level is N = Fₖ + 1 points from the pure Weyl sequence
-frac(k · 1597/2584), giving exactly three gap sizes {Fₖ₋₂, Fₖ₋₁, Fₖ}.
-
-Level 1: N =  56 = F₁₀+1  →  gaps {21, 34, 55} = {F₈, F₉, F₁₀}
-Level 2: N =  90 = F₁₁+1  →  gaps {13, 21, 34} = {F₇, F₈, F₉}   (same as Brothers1419!)
-Level 3: N = 146 = F₁₂+1  →  gaps { 8, 13, 21} = {F₆, F₇, F₈}
-
-The ratio between successive levels ≈ φ = 1.618... — the H4 inflation factor.
-
-Density tower (union bound):
-  N = 56  →  (9/4M)^56  ≈ 10^-342
-  N = 90  →  (9/4M)^90  ≈ 10^-553
-  N = 146 →  (9/4M)^146 ≈ 10^-898
--/
+/-! # Family.H4Tower -/
 
 def α2_num : ℕ := 1597
 def α2_den : ℕ := 2584
-
--- ── Point lists ───────────────────────────────────────────────────────────────
 
 def H4_56_points : List ℕ :=
   [0, 34, 89, 123, 178, 233, 267, 322, 356, 411, 466, 500, 555, 610, 644, 699,
@@ -55,8 +37,6 @@ def H4_146_points : List ℕ :=
    2241, 2254, 2275, 2296, 2309, 2330, 2343, 2364, 2385, 2398, 2419, 2440, 2453,
    2474, 2487, 2508, 2529, 2542, 2563, 2576]
 
--- ── Gap helper ────────────────────────────────────────────────────────────────
-
 def weyl_gaps_of (pts : List ℕ) (den : ℕ) : List ℕ :=
   let s := pts.mergeSort (· ≤ ·)
   let rec go : List ℕ → List ℕ
@@ -65,52 +45,31 @@ def weyl_gaps_of (pts : List ℕ) (den : ℕ) : List ℕ :=
     | a :: b :: t => (b - a) :: go (b :: t)
   go s ++ [den - s.getLastD 0 + s.headD 0]
 
--- ── Level 1: N = 56 = F₁₀ + 1 ────────────────────────────────────────────────
-
 theorem H4_56_count : H4_56_points.length = 56 := by native_decide
 theorem H4_56_gaps : (weyl_gaps_of H4_56_points α2_den).eraseDups.mergeSort = [21, 34, 55] := by native_decide
 theorem H4_56_sum  : (weyl_gaps_of H4_56_points α2_den).sum = 2584 := by native_decide
-
--- ── Level 2: N = 90 = F₁₁ + 1 ────────────────────────────────────────────────
 
 theorem H4_90_count : H4_90_points.length = 90 := by native_decide
 theorem H4_90_gaps : (weyl_gaps_of H4_90_points α2_den).eraseDups.mergeSort = [13, 21, 34] := by native_decide
 theorem H4_90_sum  : (weyl_gaps_of H4_90_points α2_den).sum = 2584 := by native_decide
 
--- ── Level 3: N = 146 = F₁₂ + 1 ───────────────────────────────────────────────
-
 theorem H4_146_count : H4_146_points.length = 146 := by native_decide
 theorem H4_146_gaps : (weyl_gaps_of H4_146_points α2_den).eraseDups.mergeSort = [8, 13, 21] := by native_decide
 theorem H4_146_sum  : (weyl_gaps_of H4_146_points α2_den).sum = 2584 := by native_decide
-
--- ── Inflation ratios ≈ φ ──────────────────────────────────────────────────────
 
 theorem tower_inflation_56_90  : (90:ℝ)/(56:ℝ) > (8:ℝ)/(5:ℝ) ∧ (90:ℝ)/(56:ℝ) < (17:ℝ)/(10:ℝ) := by
   constructor <;> norm_num
 theorem tower_inflation_90_146 : (146:ℝ)/(90:ℝ) > (8:ℝ)/(5:ℝ) ∧ (146:ℝ)/(90:ℝ) < (17:ℝ)/(10:ℝ) := by
   constructor <;> norm_num
 
--- ── H4 / 600-cell relation ────────────────────────────────────────────────────
-
 def H4_600cell_vertices : ℕ := 120
 
--- 56 * 2 + 8 = 120: the 56-point shell is (600-cell - 8 poles) / 2
 theorem H4_56_relation_600cell :
     H4_56_points.length * 2 + 8 = H4_600cell_vertices := by native_decide
 
--- ── Density tower (union bound, norm_num-friendly) ────────────────────────────
-
--- 9 / 4000000^56 < 10^-300  (actual ≈ 10^-405)
-theorem density_tower_56  : (9:ℝ) / (4000000:ℝ)^(56:ℕ) < 1/(10:ℝ)^(300:ℕ) := by
-  norm_num
--- 9 / 4000000^90 < 10^-300  (actual ≈ 10^-553)
-theorem density_tower_90  : (9:ℝ) / (4000000:ℝ)^(90:ℕ) < 1/(10:ℝ)^(300:ℕ) := by
-  norm_num
--- 9 / 4000000^146 < 10^-300 (actual ≈ 10^-898)
-theorem density_tower_146 : (9:ℝ) / (4000000:ℝ)^(146:ℕ) < 1/(10:ℝ)^(300:ℕ) := by
-  norm_num
-
--- ── Compound certificate ──────────────────────────────────────────────────────
+theorem density_tower_56  : (9:ℝ) / (4000000:ℝ) ^ (56:ℕ) < 1 / (10:ℝ) ^ (300:ℕ) := by norm_num
+theorem density_tower_90  : (9:ℝ) / (4000000:ℝ) ^ (90:ℕ) < 1 / (10:ℝ) ^ (300:ℕ) := by norm_num
+theorem density_tower_146 : (9:ℝ) / (4000000:ℝ) ^ (146:ℕ) < 1 / (10:ℝ) ^ (300:ℕ) := by norm_num
 
 theorem H4_tower_certified :
     H4_56_points.length = 56 ∧
