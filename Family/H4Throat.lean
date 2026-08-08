@@ -41,7 +41,7 @@ theorem convergent_error : |((610:ℝ)/987) - inv_φ| < 5e-7 := by
   unfold inv_φ φ
   have h1 : Real.sqrt 5 < 2.236068 := by
     nlinarith [Real.sq_sqrt (show (0:ℝ) ≤ 5 by norm_num), Real.sqrt_nonneg 5]
-  have h2 : Real.sqrt 5 > 2.236067 := by
+  have h2 : Real.sqrt 5 > 2.2360679 := by
     nlinarith [Real.sq_sqrt (show (0:ℝ) ≤ 5 by norm_num), Real.sqrt_nonneg 5]
   rw [abs_lt]
   constructor <;> nlinarith
