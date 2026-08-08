@@ -85,8 +85,10 @@ theorem H4_146_sum  : (weyl_gaps_of H4_146_points α2_den).sum = 2584 := by nati
 
 -- ── Inflation ratios ≈ φ ──────────────────────────────────────────────────────
 
-theorem tower_inflation_56_90  : (90 : ℝ)/56  > (8:ℝ)/5 ∧ (90 : ℝ)/56  < (17:ℝ)/10 := by constructor <;> norm_num
-theorem tower_inflation_90_146 : (146 : ℝ)/90 > (8:ℝ)/5 ∧ (146 : ℝ)/90 < (17:ℝ)/10 := by constructor <;> norm_num
+theorem tower_inflation_56_90  : (90:ℝ)/(56:ℝ) > (8:ℝ)/(5:ℝ) ∧ (90:ℝ)/(56:ℝ) < (17:ℝ)/(10:ℝ) := by
+  constructor <;> norm_num
+theorem tower_inflation_90_146 : (146:ℝ)/(90:ℝ) > (8:ℝ)/(5:ℝ) ∧ (146:ℝ)/(90:ℝ) < (17:ℝ)/(10:ℝ) := by
+  constructor <;> norm_num
 
 -- ── H4 / 600-cell relation ────────────────────────────────────────────────────
 
@@ -99,11 +101,14 @@ theorem H4_56_relation_600cell :
 -- ── Density tower (union bound, norm_num-friendly) ────────────────────────────
 
 -- 9 / 4000000^56 < 10^-300  (actual ≈ 10^-405)
-theorem density_tower_56  : (9 : ℝ) / 4000000 ^ 56  < (1:ℝ)/10^300 := by norm_num
+theorem density_tower_56  : (9:ℝ) / (4000000:ℝ)^(56:ℕ) < 1/(10:ℝ)^(300:ℕ) := by
+  norm_num
 -- 9 / 4000000^90 < 10^-300  (actual ≈ 10^-553)
-theorem density_tower_90  : (9 : ℝ) / 4000000 ^ 90  < (1:ℝ)/10^300 := by norm_num
+theorem density_tower_90  : (9:ℝ) / (4000000:ℝ)^(90:ℕ) < 1/(10:ℝ)^(300:ℕ) := by
+  norm_num
 -- 9 / 4000000^146 < 10^-300 (actual ≈ 10^-898)
-theorem density_tower_146 : (9 : ℝ) / 4000000 ^ 146 < (1:ℝ)/10^300 := by norm_num
+theorem density_tower_146 : (9:ℝ) / (4000000:ℝ)^(146:ℕ) < 1/(10:ℝ)^(300:ℕ) := by
+  norm_num
 
 -- ── Compound certificate ──────────────────────────────────────────────────────
 
