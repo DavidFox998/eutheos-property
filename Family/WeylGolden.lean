@@ -1,6 +1,7 @@
 import Mathlib.Data.Finset.Sort
 import Mathlib.Data.Nat.Fib.Basic
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
+import Mathlib.Data.Real.Pi.Irrational
 import Family.Brothers1419
 
 namespace Eutheos
@@ -20,8 +21,8 @@ def α_rat_den : ℕ := 987
 def frac_num (p : ℕ) : ℕ := (p * α_rat_num) % α_rat_den
 
 -- 35 brothers as sorted list [from Brothers1419]
--- brothers_of_1419 defined in Family.Brothers1419 as Finset N
-def brothers_list_sorted : List ℕ := (brothers_of_1419.sort (· ≤ ·))
+-- brothers_35_finset defined in Family.Brothers1419 as Finset N
+def brothers_list_sorted : List ℕ := (brothers_35_finset.sort (· ≤ ·))
 
 -- Phases of brothers under α_rat, sorted
 def phases_sorted : List ℕ :=
@@ -38,10 +39,10 @@ def gaps_35 : List ℕ :=
 
 -- Main certifiable sentences for patent/paper
 
-theorem brothers_count_is_35 : brothers_of_1419.card = 35 := by
+theorem brothers_count_is_35 : brothers_35_finset.card = 35 := by
   native_decide
 
-theorem mem_1419 : 1419 ∈ brothers_of_1419 := by
+theorem mem_1419 : 1419 ∈ brothers_35_finset := by
   native_decide
 
 -- Three gaps are exactly Fibonacci numbers F7=13, F8=21, F9=34
@@ -59,7 +60,7 @@ theorem gaps_sum_987 :
 
 -- For Lean kernel footnote: "There are exactly 35..."
 theorem certified_sentence :
-  brothers_of_1419.card = 35 ∧
+  brothers_35_finset.card = 35 ∧
   gaps_35.eraseDups.mergeSort = [13,21,34] ∧
   gaps_35.sum = 987 := by
   exact ⟨by native_decide, by native_decide, by native_decide⟩
@@ -73,10 +74,10 @@ Uncomment to work on Weyl equidistribution.
 
 noncomputable def α0 : ℝ := 299 + Real.pi / 10
 
--- π irrational (Mathlib: Real.pi_irrational) => α0 = 299 + π/10 irrational
--- Proof: if α0 = q ∈ ℚ then π = 10*(q - 299) ∈ ℚ, contradicting Real.pi_irrational
+-- π irrational (Mathlib: irrational_pi) => α0 = 299 + π/10 irrational
+-- Proof: if α0 = q ∈ ℚ then π = 10*(q - 299) ∈ ℚ, contradicting irrational_pi
 theorem α0_irrational : Irrational α0 := by
-  have hπ : Irrational Real.pi := Real.pi_irrational
+  have hπ : Irrational Real.pi := irrational_pi
   unfold α0
   -- π/10 irrational: if π/10 = q then π = 10*q ∈ ℚ
   have hπ10 : Irrational (Real.pi / 10) := by
