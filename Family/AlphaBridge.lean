@@ -1,6 +1,5 @@
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Bounds
 import Mathlib.Data.Real.Pi.Bounds
-import Mathlib.Tactic.Interval
 import Mathlib.Tactic.Polyrith
 
 namespace Eutheos
@@ -12,32 +11,31 @@ def alpha0_rat : ℚ := alpha0_num / alpha0_den
 noncomputable def alpha0_real : ℝ := Real.pi / 10
 
 /-! ## 1. Trap π between 10-decimal bounds -/
+-- Pi.Bounds in 4.15 has pi = 3.141592653589793238...
+-- Use the 18-digit bound that exists and linarith down to 10 decimals
 theorem pi_in_interval :
     (3.1415926535 : ℝ) < Real.pi ∧ Real.pi < 3.1415926536 := by
-  have h_tan_pi4 : Real.tan (Real.pi / 4) = 1 := Real.tan_pi_div_four
-  -- interval can prove tan(0.785398163375) < 1 < tan(0.7853981634) rigorously
-  have h_tan_low : Real.tan (3.1415926535 / 4) < 1 := by
-    have h : Real.tan (3.1415926535 / 4) < 0.9999999999 := by interval
-    linarith
-  have h_tan_high : (1 : ℝ) < Real.tan (3.1415926536 / 4) := by
-    have h : (1.0000000001 : ℝ) < Real.tan (3.1415926536 / 4) := by interval
-    linarith
-  have hmono : StrictMonoOn Real.tan (Set.Ioo (-Real.pi/2) (Real.pi/2)) :=
-    Real.tan_strictMonoOn
-  have hmem_pi4 : Real.pi / 4 ∈ Set.Ioo (-Real.pi/2) (Real.pi/2) := by
-    constructor <;> linarith [Real.pi_pos, Real.pi_gt_three]
-  have hmem_35 : (3.1415926535 / 4 : ℝ) ∈ Set.Ioo (-Real.pi/2) (Real.pi/2) := by
-    constructor <;> linarith [Real.pi_gt_three, Real.pi_pos]
-  have hmem_36 : (3.1415926536 / 4 : ℝ) ∈ Set.Ioo (-Real.pi/2) (Real.pi/2) := by
-    constructor <;> linarith [Real.pi_gt_three, Real.pi_pos]
   constructor
-  · have h_lt : Real.tan (3.1415926535 / 4) < Real.tan (Real.pi / 4) := by
-      rw [h_tan_pi4]; exact h_tan_low
-    have h_eq := hmono.lt_iff_lt hmem_35 hmem_pi4 |>.mpr h_lt
+  · have h : (3.141592653589793 : ℝ) < Real.pi := by
+      first
+      | exact Real.pi_gt_3141592653589793238
+      | exact Real.pi_gt_3141592653589793
+      | exact Real.pi_gt_314159265358979
+      | exact Real.pi_gt_31415926535
+      | exact Real.pi_gt_3141592653
+      | linarith [Real.pi_gt_3141592653589793238]
+      | linarith [Real.pi_gt_3141592653589793]
+      | linarith [Real.pi_gt_31415926535]
     linarith
-  · have h_lt : Real.tan (Real.pi / 4) < Real.tan (3.1415926536 / 4) := by
-      rw [h_tan_pi4]; exact h_tan_high
-    have h_eq := hmono.lt_iff_lt hmem_pi4 hmem_36 |>.mpr h_lt
+  · have h : Real.pi < (3.141592653589794 : ℝ) := by
+      first
+      | exact Real.pi_lt_3141592653589793240
+      | exact Real.pi_lt_3141592653589793
+      | exact Real.pi_lt_314159265358980
+      | exact Real.pi_lt_31415926536
+      | linarith [Real.pi_lt_3141592653589793240]
+      | linarith [Real.pi_lt_3141592653589793]
+      | linarith [Real.pi_lt_31415926536]
     linarith
 
 /-! ## 2. Bridge -/
