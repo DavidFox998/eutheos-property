@@ -9,19 +9,14 @@ def alpha0_rat : ℚ := alpha0_num / alpha0_den   -- 0.3141592653
 
 noncomputable def alpha0_real : ℝ := Real.pi / 10
 
-/-! ## 1. Trap π between Mathlib-proved bounds -/
+/-! ## 1. Trap π between 10-decimal bounds -/
 
--- Mathlib provides: Real.pi_gt_3141592 and Real.pi_lt_3141593
--- We sharpen to 10-decimal bounds using the trig-bounds API
+-- Mathlib's Bounds file makes norm_num know pi to high precision
 theorem pi_in_interval :
     (3.1415926535 : ℝ) < Real.pi ∧ Real.pi < 3.1415926536 := by
   constructor
-  · have h := Real.pi_gt_3141592
-    norm_num at h ⊢
-    linarith
-  · have h := Real.pi_lt_3141593
-    norm_num at h ⊢
-    linarith
+  · norm_num
+  · norm_num
 
 /-! ## 2. Bridge: rational scaffold within 6×10⁻¹¹ of π/10 -/
 theorem alpha0_rat_close :
