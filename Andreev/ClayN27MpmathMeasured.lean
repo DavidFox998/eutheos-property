@@ -18,7 +18,7 @@ def distinct_25_mp : Nat := 1048567
 def blocks_25 : Nat := 1048576
 def Lp_25_mp : Nat := 3518406338805
 
-theorem dens_27_999999 : distinct_27_mp *1000000 / blocks_27 = 999999 := by native_decide -- 99.999785% only 9 collisions in 4M
+theorem dens_27_999999 : distinct_27_mp *1000000 / blocks_27 = 999997 := by native_decide -- 99.999785% only 9 collisions in 4M
 theorem dens_26_999995 : distinct_26_mp *1000000 / blocks_26 = 999995 := by native_decide -- 99.99957%
 theorem dens_25_9999 : distinct_25_mp *10000 / blocks_25 = 9999 := by native_decide -- 99.99914%
 
@@ -34,7 +34,7 @@ theorem factor_27_93 : Lp_27_mp *100 / Nsq_log4_27 = 93 := by native_decide -- 0
 
 def chain_27 : Bool := true
 theorem chain_27_thm : chain_27 = true := by
-  have h1 : distinct_27_mp *1000000 / blocks_27 = 999999 := by native_decide -- 99.999785% only 9 collisions
+  have h1 : distinct_27_mp *1000000 / blocks_27 = 999997 := by native_decide -- 99.999785% only 9 collisions
   have h2 : L_27_mp > s_27 := by native_decide
   have h3 : Lp_27_mp > Np101_27 := by native_decide -- 52T>4.5B
   have h4 : Lp_27_mp / Np_27 = 14383 := by native_decide -- 14383x ~1000x predicted at n30 achieved at n27
