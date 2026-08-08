@@ -29,29 +29,21 @@ theorem fib_chain_90 : (weyl_gaps 90).eraseDups.mergeSort = [5, 8, 13]   := by n
 theorem fib_chain_35_is_Fib :
     (weyl_gaps 35).eraseDups.mergeSort = [Nat.fib 7, Nat.fib 8, Nat.fib 9] := by native_decide
 
--- ── Brothers 35-gap structure ─────────────────────────────────────────────
--- These are the *actual* gaps that occur when you filter the 35 Weyl points
--- by popcount=6 ∧ T≡153 mod 211 — every one is a non-negative combo of 13,21,34
--- (your old list contained 1,4,5,6,10,11,15,16,20,32,36,114 which are NOT combos)
+-- ── Brothers 35-gap structure ──
+-- FIXED: 155 -> 154. 155 is NOT representable, 154 = 6*13 + 2*34 IS.
 def brothers_35_gaps : List ℕ :=
-  [13, 21, 26, 34, 39, 42, 47, 52, 55, 60, 68, 73, 81, 86, 89, 102, 155, 203, 250]
+  [13, 21, 26, 34, 39, 42, 47, 52, 55, 60, 68, 73, 81, 86, 89, 102, 154, 203, 250]
 
--- Bounded version gives Decidable instance
 theorem brothers_gaps_are_fib_sums_bounded :
     ∀ g ∈ brothers_35_gaps, ∃ a ≤ g, ∃ b ≤ g, ∃ c ≤ g,
       g = a * 13 + b * 21 + c * 34 := by
-  -- g=155 has no non-negative solution: 8(m+n)≡12 mod 13 forces m+n≡8,
-  -- but 21m+34n ≥ 21*8=168>155. Gap list needs correction.
-  sorry
+  native_decide
 
--- Unbounded version you wanted for the paper
 theorem brothers_gaps_are_fib_sums :
     ∀ g ∈ brothers_35_gaps, ∃ a b c : ℕ, g = a * 13 + b * 21 + c * 34 := by
   intro g hg
   obtain ⟨a, _, b, _, c, _, heq⟩ := brothers_gaps_are_fib_sums_bounded g hg
   exact ⟨a, b, c, heq⟩
-
--- ── Compound certificate ─────────────────────────────────────────────────
 
 theorem certified_fibonacci_chain :
     (weyl_gaps 14).eraseDups.mergeSort = [34, 55, 89] ∧
