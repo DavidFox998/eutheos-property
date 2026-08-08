@@ -1,6 +1,8 @@
 import Mathlib.Data.Finset.Sort
 import Mathlib.Data.Nat.Fib.Basic
 import Mathlib.Data.Real.Basic
+import Mathlib.Data.Real.Irrational
+import Mathlib.Data.Real.Pi.Irrational
 import Mathlib.Analysis.SpecialFunctions.Trigonometric.Basic
 import Mathlib.Tactic.NormNum
 
@@ -16,7 +18,7 @@ def frac_num (p : ℕ) : ℕ := (p * α_rat_num) % α_rat_den
 def brothers_of_1419_list : List ℕ :=
   [1419, 1841, 2474, 4584, 5428, 5639, 6694, 9648, 9859, 10914, 12813, 13024, 13446,
    16611, 18088, 18510, 21042, 21253, 24629, 25473, 25684, 29060, 33069, 34124,
-   35601, 39188, 40032, 41298, 41509, 42564, 43408, 44041, 49738, 51848]
+   35601, 39188, 40032, 41298, 41509, 42564, 43408, 44041, 49738, 51848, 52481]
 
 def brothers_list_sorted : List ℕ := brothers_of_1419_list.mergeSort (· ≤ ·)
 
@@ -60,7 +62,7 @@ theorem certified_sentence :
 noncomputable def α0 : ℝ := 299 + Real.pi / 10
 
 theorem α0_irrational : Irrational α0 := by
-  have hπ : Irrational Real.pi := Real.irrational_pi
+  have hπ : Irrational Real.pi := irrational_pi
   unfold α0
   have hπ10 : Irrational (Real.pi / 10) := by
     intro ⟨q, hq⟩
