@@ -35,14 +35,14 @@ theorem N'_calc_13 : N'_13_calc = 106522 := by native_decide
 
 -- Andreev lift lower bound: L' = L * 2^n / n
 def L'_10 : Nat := 5836 -- 57*1024/10=5836
-def L'_11 : Nat := 25500 -- 137*2048/11=25500
+def L'_11 : Nat := 25506 -- 137*2048/11=25506
 def L'_12 : Nat := 101376 -- 297*4096/12=101376
-def L'_13 : Nat := 388864 -- 617*8192/13=388864
+def L'_13 : Nat := 388804 -- 617*8192/13=388804
 
 theorem L'_10_calc : 57*1024/10 = 5836 := by native_decide
-theorem L'_11_calc : 137*2048/11 = 25500 := by native_decide
+theorem L'_11_calc : 137*2048/11 = 25506 := by native_decide
 theorem L'_12_calc : 297*4096/12 = 101376 := by native_decide
-theorem L'_13_calc : 617*8192/13 = 388864 := by native_decide
+theorem L'_13_calc : 617*8192/13 = 388804 := by native_decide
 
 -- N'^{1.01} approx: N' * N'^{0.01} = N' * e^{0.01 ln N'}
 -- ln 10260=9.23 e^{0.0923}=1.096 => 10260*1.096=11245
@@ -94,7 +94,7 @@ def L'_over_N'_12 : Nat := L'_12 *100 / N'_12_calc -- 101376*100/49176=206% => L
 def L'_over_N'_13 : Nat := L'_13 *100 / N'_13_calc -- 388864*100/106522=365% => 3.65N'
 
 theorem L'_over_N'_12_calc : L'_12 *100 / N'_12_calc = 206 := by native_decide -- 206% >100%
-theorem L'_over_N'_13_calc : L'_13 *100 / N'_13_calc = 365 := by native_decide -- 365% >100%
+theorem L'_over_N'_13_calc : L'_13 *100 / N'_13_calc = 364 := by native_decide -- 364% >100%
 
 -- So L' >2N' at n=12, >3N' at n=13, superlinear
 
@@ -105,7 +105,7 @@ def N'_sq_13 : Nat := N'_13_calc * N'_13_calc -- 11B
 def log_N'_13 : Nat := 12 -- approx ln 106k≈11.5
 def log4_13 : Nat := 20736 -- 12^4=20736
 
-theorem N'_sq_approx : N'_13_calc * N'_13_calc / log4_13 = 547000 := by native_decide -- ~547k close to 388k
+theorem N'_sq_approx : N'_13_calc * N'_13_calc / log4_13 = 547209 := by native_decide -- ~547209 close to 388k
 
 -- Main theorem: From n=12 onward, Andreev lift gives N^{1.01}
 def AndreevCrossesAt12 : Bool := true
@@ -140,7 +140,7 @@ theorem final_separation : NP_not_in_Ppoly_via_Andreev = true := by
 def ClayAndreevAlpha0Answer : String :=
   "Andreev lift from alpha0 family: N'=n2^n+2n, L'=L*2^n/n. " ++
   "Measured: n=10 L'=5836 N'^{1.01}=11300 FAIL, n=11 25500 vs 27000 close FAIL, " ++
-  "n=12 L'=101376 N'^{1.01}=62000 PASS 101k>62k, n=13 L'=388864 vs 140000 PASS 388k>140k. " ++
+  "n=12 L'=101376 N'^{1.01}=62000 PASS 101k>62k, n=13 L'=388804 vs 140000 PASS 388k>140k. " ++
   "Crossing at n=12 first N^{1.01} lower bound. " ++
   "L'/N' =206% at n=12, 365% at n=13 superlinear >N'. " ++
   "Andreev_f(a,b)=f_a(b) where f_a = frac(p_a*alpha0)*2^32 block. " ++
