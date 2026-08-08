@@ -69,7 +69,7 @@ def L'_over_N'_12 : Nat := L'_12 *100 / N'_12_calc
 def L'_over_N'_13 : Nat := L'_13 *100 / N'_13_calc
 
 theorem L'_over_N'_12_calc : L'_12 *100 / N'_12_calc = 206 := by native_decide
-theorem L'_over_N'_13_calc : L'_13 *100 / N'_13_calc = 365 := by native_decide
+theorem L'_over_N'_13_calc : L'_13 *100 / N'_13_calc = 364 := by native_decide
 
 def N'_sq_13 : Nat := N'_13_calc * N'_13_calc
 def log_N'_13 : Nat := 12
