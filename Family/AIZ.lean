@@ -43,7 +43,7 @@ theorem hop_all_Nodup :
 theorem hop_Nodup (t : Nat) (ht : t ≤ 1419) : (hop_at t).Nodup := by
   have h := hop_all_Nodup
   simp only [List.all_eq_true, List.mem_range] at h
-  exact h t (by omega)
+  exact of_decide_eq_true (h t (by omega))
 
 /-! ## 3. Leader — 1419 self-symmetry -/
 def leader : Nat := 1419
@@ -81,9 +81,10 @@ theorem valid_packet_in_desert (pkt : Packet) (hv : valid_packet pkt = true) :
   simp only [valid_packet, Bool.and_eq_true] at hv
   obtain ⟨⟨⟨⟨⟨hs, hd⟩, _⟩, _⟩, _⟩, _⟩ := hv
   have hge : brothers_35.all (· ≥ 193) = true := by native_decide
-  have hall := List.all_iff_forall.mp hge
+  rw [List.all_eq_true] at hge
   simp only [valid_slot] at hs hd
-  exact ⟨hall pkt.src (by simpa using hs), hall pkt.dst (by simpa using hd)⟩
+  exact ⟨of_decide_eq_true (hge pkt.src (by simpa using hs)),
+         of_decide_eq_true (hge pkt.dst (by simpa using hd))⟩
 
 /-! ## 5. Hilbert route (local, wired to local gate) -/
 noncomputable def route (z : ℂ) (path : List Nat) (t : Nat) : ℂ :=
