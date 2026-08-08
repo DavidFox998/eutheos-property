@@ -62,7 +62,8 @@ def brothers_35_gaps : List ℕ :=
 
 theorem brothers_gaps_are_fib_sums :
     ∀ g ∈ brothers_35_gaps, ∃ a b c : ℕ, g = a * 13 + b * 21 + c * 34 := by
-  native_decide
+  -- unbounded ∃ a b c : ℕ has no Decidable instance for native_decide; theorem may also be false for gap values < 13
+  sorry
 
 -- ── Compound certificate ─────────────────────────────────────────────────────
 
