@@ -14,14 +14,11 @@ def jitter_rat (p t : Nat) : Nat := frac_rat (p + t) * 2
 def jitters_at_time (t : Nat) : List Nat :=
   (List.range 35).map (fun p => jitter_rat (p + 1) t)
 
-/-! coprime witness: gcd(3141592653, 10^10) = 1 -/
 theorem alpha0_coprime : Nat.Coprime alpha0_num alpha0_den := by
   rw [Nat.Coprime]; native_decide
 
 theorem alpha0_den_pos : 0 < alpha0_den := by native_decide
 
-/-! For t ≤ 1419, all 35 jitter values at time t are distinct.
-    Checked exhaustively: 1420 slices × C(35,2)=595 pairs ≈ 845 000 comparisons. -/
 def all_jitters_Nodup_upto (M : Nat) : Bool :=
   (List.range (M + 1)).all (fun t => decide (jitters_at_time t).Nodup)
 
@@ -33,9 +30,6 @@ theorem jitters_Nodup_at_time_le (t : Nat) (ht : t ≤ 1419) : (jitters_at_time 
              decide_eq_true_eq] at h
   exact h t (by omega)
 
-/-! EMI reduction: 35 phases spread power − 30.8 dB.
-    Key inequality: 35² = 1225 > 1000 = 10³ ⇒ log₁₀(35) > 3/2
-    ⇒ 20·log(1/35)/log(10) < −30. -/
 theorem emi_reduction_db : (20 : ℝ) * Real.log (1 / 35) / Real.log 10 < -30 := by
   have h1 : Real.log (1 / 35 : ℝ) = -Real.log 35 := by rw [one_div, Real.log_inv]
   have h2 : (0 : ℝ) < Real.log 10 := Real.log_pos (by norm_num)
@@ -48,18 +42,17 @@ theorem emi_reduction_db : (20 : ℝ) * Real.log (1 / 35) / Real.log 10 < -30 :=
   have h7 : 3 * Real.log 10 < 2 * Real.log 35 := by linarith
   rw [h1, div_lt_iff₀ h2]; linarith
 
-/-! α0 = 299 + π/10 is irrational (Mathlib: irrational_pi). -/
-    theorem alpha0_irrational : Irrational (299 + Real.pi / 10) := by
-    have hπ : Irrational Real.pi := irrational_pi
-    have hπ10 : Irrational (Real.pi / 10) := by
-      intro ⟨q, hq⟩
-      apply hπ
-      exact ⟨q * 10, by have := hq; field_simp at this ⊢; linarith⟩
+theorem alpha0_irrational : Irrational ((299 : ℝ) + Real.pi / 10) := by
+  have hpi : Irrational Real.pi := irrational_pi
+  have hpi10 : Irrational (Real.pi / 10 : ℝ) := by
     intro ⟨q, hq⟩
-    apply hπ10
-    exact ⟨q - 299, by have := hq; push_cast at this ⊢; linarith⟩
+    apply hpi
+    exact ⟨q * 10, by have := hq; field_simp at this ⊢; linarith⟩
+  intro ⟨q, hq⟩
+  apply hpi10
+  exact ⟨q - 299, by have := hq; push_cast at this ⊢; linarith⟩
 
-def MAX_COMPUTE_MS  : Nat := 6 + 6 + 5 + 20 + 49 + 60 + 82  -- 228
+def MAX_COMPUTE_MS : Nat := 6 + 6 + 5 + 20 + 49 + 60 + 82
 def MAX_MORNINGSTAR_MS : Nat := 1419
 
 theorem time_jitter_spreads_emi (t : Nat) (_ : t ≤ 1419) :
