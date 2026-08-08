@@ -1,22 +1,21 @@
 import Mathlib.Data.Nat.Fib.Basic
 import Mathlib.Data.Real.Basic
-import Mathlib.Tactic.NormNum
+import Mathlib.Tactic
 
 namespace Eutheos
 
 def N_blocks : ℕ := 4000000
 def collisions_1 : ℕ := 9
-def distinct_1 : ℕ := N_blocks - collisions_1 -- 3999991
+def distinct_1 : ℕ := N_blocks - collisions_1
 
 def density_initial_per_100 : ℕ := 71
-def density_final_per_100k : ℕ := distinct_1 * 100000 / N_blocks -- 99999
+def density_final_per_100k : ℕ := distinct_1 * 100000 / N_blocks
 
 def bound_Q5_check : ℕ := 82829
 def S14_check : List ℕ :=
   [82837, 82891, 83047, 83063, 83117, 83203, 83219, 83257,
    83273, 83639, 83983, 84053, 84247, 84263]
 
--- Pure Weyl N=35 gaps (not brothers filtered gaps)
 def weyl_phase_asym (k : ℕ) : ℕ := (k * 610) % 987
 def weyl_points_asym : List ℕ := (List.range 35 |>.map weyl_phase_asym).mergeSort (· ≤ ·)
 def weyl_gaps_asym : List ℕ :=
@@ -34,7 +33,6 @@ theorem collisions_eq : collisions_1 = 9 := by rfl
 theorem distinct_calc : distinct_1 = 3999991 := by native_decide
 theorem density_71_to_99999 : density_final_per_100k = 99999 := by native_decide
 theorem density_improves : density_final_per_100k > density_initial_per_100 * 1000 := by native_decide
-
 theorem brothers_count_35 : brothers_35_list.length = 35 := by native_decide
 theorem gaps_Fib : weyl_gaps_asym.eraseDups.mergeSort (· ≤ ·) = [13, 21, 34] := by native_decide
 theorem gaps_sum_987_asym : weyl_gaps_asym.sum = 987 := by native_decide
@@ -48,28 +46,17 @@ theorem fib_ratio : (Nat.fib 9 : ℝ) / (Nat.fib 8 : ℝ) > 8 / 5 := by
   have h8 : Nat.fib 8 = 21 := by native_decide
   norm_num [h9, h8]
 
--- For n ≥ 1000, (n - n/1000)*100 / n ≥ 99
 theorem asymptotic_density_tends_to_one :
     ∃ N₀ : ℕ, ∀ n ≥ N₀, (n - n / 1000) * 100 / n ≥ 99 := by
   use 100000
   intro n hn
   have hpos : 0 < n := by omega
-  have h_le : n / 1000 * 1000 ≤ n := Nat.div_mul_le_self n 1000
   have h_eq : n = n / 1000 * 1000 + n % 1000 := (Nat.div_add_mod n 1000).symm
-  have h_q : n / 1000 ≥ 100 := by
-    have : 100000 ≤ n := hn
-    have : n / 1000 ≥ 100000 / 1000 := Nat.div_le_div_right this
-    simp at this ⊢; omega
-  -- (n - q)*100 = (999q + r)*100 ≥ 99*(1000q + r) = 99n
   have h_ge : (n - n / 1000) * 100 ≥ 99 * n := by
-    have h1 : n - n / 1000 = n / 1000 * 999 + n % 1000 := by
-      have := h_eq; omega
+    have h1 : n - n / 1000 = n / 1000 * 999 + n % 1000 := by omega
     calc (n - n / 1000) * 100 = (n / 1000 * 999 + n % 1000) * 100 := by rw [h1]
       _ = n / 1000 * 99900 + n % 1000 * 100 := by ring
-      _ ≥ n / 1000 * 99000 + n % 1000 * 99 := by
-        have : n / 1000 * 900 ≥ 0 := by omega
-        have : n % 1000 * 1 ≥ 0 := by omega
-        omega
+      _ ≥ n / 1000 * 99000 + n % 1000 * 99 := by omega
       _ = 99 * (n / 1000 * 1000 + n % 1000) := by ring
       _ = 99 * n := by rw [← h_eq]
   exact (Nat.le_div_iff_mul_le hpos).mpr h_ge
@@ -81,14 +68,8 @@ theorem asymptotic_density_forall_eps :
   intro n hn
   have hpos : 0 < n := by omega
   have h_ge : (n - 9) * 100 ≥ (100 - ε) * n := by
-    have hn900 : n ≥ 900 := by omega
-    have hε_le : ε ≤ 100 := by
-      by_contra h; push_neg at h
-      have : (100 - ε) = 0 := by omega
-      simp [this]; omega
-    -- (n-9)*100 = 100n -900 ≥ (100-ε)n ↔ εn ≥900
     have : ε * n ≥ 900 := by
-      calc ε * n ≥ 1 * 4000000 := by apply Nat.mul_le_mul; omega
+      calc ε * n ≥ 1 * 4000000 := by apply Nat.mul_le_mul; omega; omega
         _ ≥ 900 := by omega
     omega
   exact (Nat.le_div_iff_mul_le hpos).mpr h_ge
@@ -102,7 +83,7 @@ theorem certified_full_chain :
     S14_check.length = 14 ∧
     bound_Q5_check = 82829 ∧
     Nat.Coprime 610 987 :=
-  ⟨by rfl, by rfl, by native_decide, by native_decide,
+  ⟨by rfl, by native_decide, by native_decide,
    by native_decide, by native_decide, by rfl, by native_decide⟩
 
 end Eutheos
