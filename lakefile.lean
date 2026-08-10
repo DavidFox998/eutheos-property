@@ -6,43 +6,41 @@ package «eutheos-property» where
     ⟨`autoImplicit, false⟩,
     ⟨`relaxedAutoImplicit, false⟩
   ]
-  -- no external deps — zero axiom build
 
--- Root umbrella
+-- single root — this is what fixes ./././Bounds/Bounds/...
 @[default_target]
-lean_lib «EutheosProperty» where
+lean_lib EutheosProperty where
   srcDir := "."
 
--- Your 10 libs from screenshot + NEW Common
 lean_lib Common where
-  srcDir := "Common"
+  srcDir := "."
 
 lean_lib Witness where
-  srcDir := "Witness"
+  srcDir := "."
 
 lean_lib Family where
-  srcDir := "Family"
+  srcDir := "."
 
 lean_lib Bounds where
-  srcDir := "Bounds"
+  srcDir := "."
 
 lean_lib Andreev where
-  srcDir := "Andreev"
+  srcDir := "."
 
 lean_lib CookLevin where
-  srcDir := "CookLevin"
+  srcDir := "."
 
 lean_lib Ppoly where
-  srcDir := "Ppoly"
+  srcDir := "."
 
 lean_lib MMW where
-  srcDir := "MMW"
+  srcDir := "."
 
 lean_lib Final where
-  srcDir := "Final"
+  srcDir := "."
 
 lean_lib Protocol where
-  srcDir := "Protocol"
+  srcDir := "."
 
 lean_lib Archive where
-  srcDir := "Archive"
+  srcDir := "."
