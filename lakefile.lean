@@ -1,46 +1,41 @@
 import Lake
 open Lake DSL
 
-package «eutheos-property» where
-  leanOptions := #[
-    ⟨`autoImplicit, false⟩,
-    ⟨`relaxedAutoImplicit, false⟩
-  ]
+package eutheos_property where
+  leanOptions := #[⟨`autoImplicit, false⟩]
 
--- single root — this is what fixes ./././Bounds/Bounds/...
+require mathlib from git "https://github.com/leanprover-community/mathlib4.git" @ "v4.15.0"
+
 @[default_target]
-lean_lib EutheosProperty where
-  srcDir := "."
-
 lean_lib Common where
-  srcDir := "."
-
-lean_lib Witness where
-  srcDir := "."
-
-lean_lib Family where
-  srcDir := "."
+  srcDir := "Common"
 
 lean_lib Bounds where
-  srcDir := "."
+  srcDir := "Bounds"
+
+lean_lib Witness where
+  srcDir := "Witness"
+
+lean_lib Family where
+  srcDir := "Family"
 
 lean_lib Andreev where
-  srcDir := "."
-
-lean_lib CookLevin where
-  srcDir := "."
+  srcDir := "Andreev"
 
 lean_lib Ppoly where
-  srcDir := "."
+  srcDir := "Ppoly"
+
+lean_lib CookLevin where
+  srcDir := "CookLevin"
 
 lean_lib MMW where
-  srcDir := "."
+  srcDir := "MMW"
 
 lean_lib Final where
-  srcDir := "."
+  srcDir := "Final"
 
 lean_lib Protocol where
-  srcDir := "."
+  srcDir := "Protocol"
 
-lean_lib Archive where
+lean_lib Eutheos where
   srcDir := "."
