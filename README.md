@@ -85,7 +85,6 @@ Andreev Lift to N^{1.01} → N²/log⁴:
 | 20971560 | 4293761433 | 24822587 | 204× PASS |
 | 3623878710 | 52124881353538 | 4516119135 | 14383× true PASS |
 
-
 def Final_green := has_dup blocks_32=false ∧ L_GapMCSP>33 ∧ 9765625<10892522 ∧ 4194304-4194295=9 ∧ 101376>62000 ∧ 52124881353538/3623878710=14383 ∧ 82829 ∧ 165689 ∧ 10240≤1048576
 theorem Final_green_thm : Final_green := by native_decide
 
@@ -139,6 +138,7 @@ Reproduction
 ---
 
 ORCID: [0009-0008-1290-6105](https://orcid.org/0009-0008-1290-6105) · Archive: [pistus-theoria](https://github.com/DavidFox998/pistus-theoria) — `OperaNumerorum_MasterEquations.pdf SHA 7f6b31b4`
+**Ensemble:** `sha256:e1617bc96018da4577f153f2e0cd8cc4eda1183434a9624b6cefaedc655db6c5` · hub [`rh-p5-bridge-14`](https://github.com/DavidFox998/rh-p5-bridge-14) · anchor `d04e4bd1`
 ## Author
 
 David J. Fox · Independent researcher · Aberdeen, WA
