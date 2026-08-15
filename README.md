@@ -1,5 +1,8 @@
 # Eutheos Property — Barrier-Bypassing Property via Witness 1419 (0x058B)
 
+> **Opera Numerorum ensemble** — 19 repos · chain `7472f4e5` · [REPOS.md →](https://github.com/DavidFox998/rh-p5-bridge-14/blob/main/REPOS.md)
+
+
 **Build #94 — ClayDirichletBrothersClean — lake build green, zero axiom, zero sorry, all native_decide**
 **Property `P(f) ≡ f%211=153 ∧ popcount=6 ∧ CC=9 ∧ monotone` — Witness `1419=3×11×43` — Study side, companion to p-vs-np mechanics — Opera Numerorum 13/19**
 
