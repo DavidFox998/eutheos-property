@@ -67,8 +67,8 @@ The phase boundary 1/φ² is a non-large, non-algebrizing obstruction.
 ANSWER (you are here)           ← MACHINE
 eutheos-property                ← p-vs-np
 
-CHAIN SHA256 (all 12 repos locked 2026-08-05):
-c79c94e7676a10b1cfb5afc75b7346b9b5b8589dee9b679db230ba3b8034e6d1
+CHAIN SHA256 (all 19 repos locked 2026-08-15):
+f39ed9a9bd7cc02c6cf415f40b3faaa3c627a5a0d53621766466f31a2211e7ce
 See CHAIN.md for all 12 repo HEADs.
 ```
 
@@ -88,5 +88,5 @@ Q5               = 226
 Dirichlet bound  = 82829
 S14 primes       = [82837..84263]  (14 primes)
 N=4M collisions  = 9
-chain SHA256     = c79c94e7676a10b1cfb5afc75b7346b9b5b8589dee9b679db230ba3b8034e6d1
+chain SHA256     = f39ed9a9bd7cc02c6cf415f40b3faaa3c627a5a0d53621766466f31a2211e7ce
 ```
