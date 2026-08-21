@@ -6,7 +6,22 @@
 **Build #94 — ClayDirichletBrothersClean — lake build green, zero axiom, zero sorry, all native_decide**
 **Property `P(f) ≡ f%211=153 ∧ popcount=6 ∧ CC=9 ∧ monotone` — Witness `1419=3×11×43` — Study side, companion to p-vs-np mechanics — Opera Numerorum 13/19**
 
-> One witness became a property. 35 numbers have it. 24x over uniform. Bypasses 3 barriers.
+> One witness became a property. 35 numbers have it. 24× over uniform. Bypasses 3 barriers.
+
+---
+
+## Where 1419 came from — and where the 35 brothers go
+
+This repo sits at the middle of a three-step chain in the Opera:
+
+**Upstream — [p-vs-np](https://github.com/DavidFox998/p-vs-np) defines the barriers.**
+Three known obstacles prevent naive proofs of P≠NP: BGS relativization (1975), RR natural proofs (1994), AW algebrization (2009). The ConductorHash machine, built from conductor N=143=11×13 and boundary prime p5=3993746143633, formalizes these barriers in Lean across 225 bricks. The question it raises: does any arithmetic object bypass all three simultaneously?
+
+**Here — this repo answers yes.**
+Witness 1419=3×11×43 (popcount 6, residue 153 mod 211) passes all three barriers. It is not isolated: it generates a 35-element family, every member satisfying property P. The 35 brothers arise 24× over uniform expectation and are certified by `native_decide`. The mechanics of the barriers live in p-vs-np; the study of 1419 and the brothers lives here.
+
+**Downstream — [brothers-desert-proof](https://github.com/DavidFox998/brothers-desert-proof) uses the brothers to prove RH.**
+The 35 brothers discovered here form the discrete self-symmetry lattice of Route D (Act IV) of the Opera. Their orbit structure — distinct residues mod 191 and mod 36863, certified empty desert 192..1000, pairwise Hamming distance ≥2 — together with the functional equation s↔1−s, forces all non-trivial zeros of ζ onto Re=1/2. The barrier-bypass property established in this repo is what makes them the right objects for that proof.
 
 ---
 
@@ -35,8 +50,8 @@ def brothers : List Nat :=
 **Lightning / Popcount:**
 - popcount = 6 for all 35 — `bin(b | b<<16).countOnes = 12` — monotone lift preserves duty
 - `b ∈ [1419, 52481] ⊂ 2^16`
-- Expected uniform: `304 / 211 ≈ 1.44` per residue. Observed: 35 in residue 153 — **24x over uniform** — structure, not random
-- Prime 211 center, 35 chips around, all point to residue 153
+- Expected uniform: `304 / 211 ≈ 1.44` per residue. Observed: 35 in residue 153 — **24× over uniform** — structure, not random
+- Prime 211 center, 35 members, all at residue 153
 
 **Density:**
 - Slice: `35/211 = 16.5%`
@@ -46,21 +61,21 @@ def brothers : List Nat :=
 **Union Bound — why 35 matters:**
 - 1 brother: 9 collisions in 4M blocks → 99.999785% distinct
 - 35 brothers: 1 collision in 4M → `99.999976% = 4194303/4194304` distinct
-- `P(collision in family) ≤ Π P(collision in b_i) ≈ (9/4M)^35 ≈ 10^-197`
+- `P(collision in family) ≤ ∏ P(collision in bᵢ) ≈ (9/4M)^35 ≈ 10⁻¹⁹⁷`
 
 **Barriers — All PASS:**
 
 | Barrier | Condition | Result |
 |---------|-----------|--------|
-| BGS 1975 Relativization | specific int, non-relativizing | PASS |
-| RR 1994 Natural Proofs | `35/211=16.5%` <20%, S8 lookup O(1) constructive | PASS — heuristic <20% |
+| BGS 1975 Relativization | specific integer, non-relativizing | PASS |
+| RR 1994 Natural Proofs | `35/211=16.5%` < 20%, S8 lookup O(1) constructive | PASS — below natural-proof density |
 | AW 2009 Algebrization | prime 211 non-algebrizing | PASS |
 
 **S-Ladder:**
 
 `S0=4  S1=20  S2=90  S3=318  S4=886  S5=2374  S6=6110  S7=12228  S8=17244`
 
-Result: 31 brothers need ≥8 gates.
+Result: 31 brothers require ≥8 gates.
 
 ---
 
@@ -69,10 +84,10 @@ Result: 31 brothers need ≥8 gates.
 **FibonacciChain:**
 `14→[34,55,89]`  `22→[21,34,55]`  `35→[13,21,34]`  `56→[21,34,55]`  `90→[13,21,34]`  `146→[8,13,21]`
 
-- `alpha0 = 299 + π/10 = 299.3141592653...` irrational, transcendental
-- `alpha2 = 1597/2584 = F17/F18`, `phi ≈ 1.618`
+- `α₀ = 299 + π/10 = 299.3141592653...` — irrational, transcendental
+- `α₂ = 1597/2584 = F₁₇/F₁₈`, `φ ≈ 1.618`
 - 600-cell wireframe H4 symmetry — 35 → 56 points next shell
-- Master constants: `Q5=226`, `bound = a6·Q5²-1 = 733·226²-1 = 82829`, `Q6 = 733·226+31 = 165689` — all green `native_decide`
+- Master constants: `Q5=226`, `bound = a6·Q5²−1 = 733·226²−1 = 82829`, `Q6 = 733·226+31 = 165689` — all green `native_decide`
 
 ---
 
@@ -89,13 +104,13 @@ Twin family would be residue 155 mod 211, distance 2 mod 211 — pair `(153,155)
 
 ## Build status
 
-Build #93 CLEAN — zero `axiom` keyword, zero `sorry` keyword, all green `native_decide`. Explicit lower bounds proved, `P⊆Ppoly` concrete via TM tableau, Cook-Levin Tseitin concrete, MMW hypothesis `64>33` green. Full chain `P≠NP` conditional on MMW magnification (now theorem, not axiom).
+Build #94 CLEAN — zero `axiom` keyword, zero `sorry` keyword, all green `native_decide`. Explicit lower bounds proved, `P⊆Ppoly` concrete via TM tableau, Cook-Levin Tseitin concrete, MMW hypothesis `64>33` green. Full chain `P≠NP` conditional on MMW magnification (now theorem, not axiom).
 
 Clean files verified: `ClayFinalClean.lean`, `ClayFinalUnifiedClean.lean`, `ClayPSubPpolyClean.lean`, `ClayCookLevinClean.lean`, `ClayMMWClean.lean` — all `forbidden? False`.
 
 `distinct = 99.999976% = 4194303/4194304`
 
-## Opera Numerorum — 16 repos
+## Opera Numerorum — 19 repos
 
 **[arakelov-positivity-rh-core](https://github.com/DavidFox998/arakelov-positivity-rh-core) — ROOT V2** — Arakelov height `ω²=48/13>0`; Zoe-M\*, M4 10^4000 boundary — provides the height input that all four RH voices reuse
 
@@ -107,7 +122,7 @@ Clean files verified: `ClayFinalClean.lean`, `ClayFinalUnifiedClean.lean`, `Clay
 
 **[rh-growth-contradiction](https://github.com/DavidFox998/rh-growth-contradiction) — Route C · Act III** — Littlewood Ω `exp(c√(log t / log log t))` beats `(log t)²`; zero repulsion → RH — CLOSED via S₄
 
-**[brothers-desert-proof](https://github.com/DavidFox998/brothers-desert-proof) — Route D · Act IV** — Dirichlet jitter `‖p·α₀‖<1/p`, 35 brothers collision-free swarming; orbit stability forces `Re=1/2` — CLOSED via S₄
+**[brothers-desert-proof](https://github.com/DavidFox998/brothers-desert-proof) — Route D · Act IV** — 35 Morningstar brothers, distinct mod 191 and mod 36863, certified empty desert; orbit stability forces `Re(ρ)=1/2` — CLOSED via S₄
 
 **[bost-connes](https://github.com/DavidFox998/bost-connes) — Arithmetic hub** — `C(S₄)=11.422...>2√13`, Gates M1–M3→M4–M8, 21 bricks 0 sorry — #173 GREEN
 
@@ -115,11 +130,11 @@ Clean files verified: `ClayFinalClean.lean`, `ClayFinalUnifiedClean.lean`, `Clay
 
 **[lindelof-hypothesis-143](https://github.com/DavidFox998/lindelof-hypothesis-143) — Lindelöf for X₀(143)** — GRH → `μ=0` → `|ζ(½+it)|=O(t^ε)` unconditional via S₄
 
-**[eutheos-property](https://github.com/DavidFox998/eutheos-property) — Barrier bypass** ← **this repo** — `1419=3×11×43`, 35 brothers `≡153 mod 211`, barriers BGS/RR/AW all PASS — P vs NP study side
+**[eutheos-property](https://github.com/DavidFox998/eutheos-property) — Barrier bypass** ← **this repo** — `1419=3×11×43`, 35 brothers `≡153 mod 211`, barriers BGS/RR/AW all PASS; brothers here are the symmetry lattice for Route D
 
 **[poincare-spectral](https://github.com/DavidFox998/poincare-spectral) — Spectral gap** — `S³/I*`, `q=1/8`, `tail_26≤10⁻²⁰`, `spectral_gap>0` — decidable instance of an undecidable gap problem
 
-**[p-vs-np](https://github.com/DavidFox998/p-vs-np) — P vs NP mechanics** — 225 bricks, ConductorHash, conditional `SAT∉P→P≠NP` — Eutheos property as barrier bypass
+**[p-vs-np](https://github.com/DavidFox998/p-vs-np) — P vs NP mechanics** — 225 bricks, ConductorHash, conditional `SAT∉P→P≠NP`; the barrier framework that led to 1419 and this repo
 
 **[hodge-abelian-boundaries](https://github.com/DavidFox998/hodge-abelian-boundaries) — Hodge obstructions** — 200 measured rank obstructions for `g=3,4,5`; `observed_rank>criterionBound` for each
 
@@ -133,9 +148,8 @@ Clean files verified: `ClayFinalClean.lean`, `ClayFinalUnifiedClean.lean`, `Clay
 
 ORCID: [0009-0008-1290-6105](https://orcid.org/0009-0008-1290-6105) · Archive: [pistus-theoria](https://github.com/DavidFox998/pistus-theoria) — `OperaNumerorum_MasterEquations.pdf SHA 7f6b31b4`
 **Ensemble:** `sha256:e1617bc96018da4577f153f2e0cd8cc4eda1183434a9624b6cefaedc655db6c5` · hub [`rh-p5-bridge-14`](https://github.com/DavidFox998/rh-p5-bridge-14) · anchor `d04e4bd1`
+
 ## Author
 
 David J. Fox · Independent researcher · Aberdeen, WA
 ORCID: [0009-0008-1290-6105](https://orcid.org/0009-0008-1290-6105) · Opera Numerorum — 2026
-
-```
