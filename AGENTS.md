@@ -69,7 +69,7 @@ eutheos-property                ← p-vs-np
 
 CHAIN SHA256 (all 19 repos locked 2026-08-15):
 f39ed9a9bd7cc02c6cf415f40b3faaa3c627a5a0d53621766466f31a2211e7ce
-See CHAIN.md for all 12 repo HEADs.
+See CHAIN.md for all 19 repo HEADs.
 ```
 
 ## Key numbers to hold in context
