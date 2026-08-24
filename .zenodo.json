@@ -1,42 +1,36 @@
 {
-  "title": "Eutheos Property — Barrier-Bypassing via Witness 1419 (0x058B) — 35 Brothers ≡153 mod 211 — Lean 4",
-  "description": "Study of the Eutheos property: P(f) ≡ f%211=153 ∧ popcount=6 ∧ CC=9 ∧ monotone. Witness 1419=3×11×43=0x058B. 35 brothers in range [1419,52481] all satisfy P. 24× over uniform distribution. Bypasses all three P vs NP barriers: BGS 1975 (relativization), RR 1994 (natural proofs), AW 2009 (algebrization). Circuit complexity lower bounds. H4 tower FibonacciChain. Build #94 clean: 0 axiom keyword, 0 sorry keyword, all native_decide. Companion to p-vs-np mechanics repo.",
-  "keywords": [
-    "eutheos-property",
-    "p-vs-np",
-    "circuit-complexity",
-    "barrier-bypass",
-    "BGS",
-    "natural-proofs",
-    "algebrization",
-    "lean4",
-    "mathlib",
-    "1419",
-    "brothers",
-    "residue-153",
-    "mod-211",
-    "opera-numerorum",
-    "formal-proof",
-    "ORCID:0009-0008-1290-6105"
-  ],
-  "license": "MIT",
+  "title": "Eutheos Property — Witness 1419 and the 35 Brothers",
   "upload_type": "software",
-  "access_right": "open",
-  "language": "en",
-  "version": "v1.0-exact-9-gates-FINAL",
-  "related_identifiers": [
-    {
-      "identifier": "https://github.com/DavidFox998/p-vs-np",
-      "relation": "isSupplementTo",
-      "resource_type": "software",
-      "scheme": "url"
-    }
-  ],
+  "description": "Lean 4 formalization of the Eutheos barrier-bypassing property built around witness 1419, the 16-bit popcount and residue conditions, and the 35 related Brothers. This repository is part of David Fox's Opera Numerorum ensemble.",
   "creators": [
     {
-      "name": "Fox, David J.",
-      "orcid": "0009-0008-1290-6105",
-      "affiliation": "Independent Researcher, Opera Numerorum"
+      "name": "Fox, David",
+      "affiliation": "Opera Numerorum",
+      "orcid": "0009-0008-1290-6105"
     }
-  ]
+  ],
+  "license": "MIT",
+  "keywords": [
+    "Eutheos property",
+    "witness 1419",
+    "35 Brothers",
+    "barrier bypassing",
+    "Lean 4",
+    "formal verification",
+    "Opera Numerorum"
+  ],
+  "access_right": "open",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/DavidFox998/eutheos-property",
+      "relation": "isSupplementTo",
+      "resource_type": "software"
+    }
+  ],
+  "communities": [
+    {
+      "identifier": "lean"
+    }
+  ],
+  "language": "en"
 }
