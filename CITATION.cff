@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "Eutheos Property — Witness 1419 and the 35 Brothers"
+message: "If you use this software, please cite it as below."
+type: software
+authors:
+  - family-names: Fox
+    given-names: David
+    orcid: "https://orcid.org/0009-0008-1290-6105"
+    affiliation: "Opera Numerorum"
+license: MIT
+repository-code: "https://github.com/DavidFox998/eutheos-property"
+keywords:
+  - "Eutheos property"
+  - "witness 1419"
+  - "35 Brothers"
+  - "barrier bypassing"
+  - "Lean 4"
+  - "formal verification"
+  - "Opera Numerorum"
+abstract: "Lean 4 formalization of the Eutheos barrier-bypassing property built around witness 1419, the 16-bit popcount and residue conditions, and the 35 related Brothers. This repository is part of David Fox's Opera Numerorum ensemble."
