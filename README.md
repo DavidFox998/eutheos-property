@@ -12,6 +12,26 @@
 
 ---
 
+## How to read this repo
+
+Every folder has its own `README.md` with the folder's file map, headline theorems (exact Lean identifiers), and honesty status. Start here, then go deep:
+
+| Folder | What it holds | Read this for |
+|---|---|---|
+| [Common/](Common/README.md) | `Ground.lean` — 211, 153, 1419, `brothers` list, `monoLift` | the constants everything rests on |
+| [Family/](Family/README.md) | the 35 brothers, Weyl/Fibonacci/H4/Dirichlet structure | **the heart** — one witness becoming a family |
+| [Bounds/](Bounds/README.md) | `CircuitBounds9.lean` — truth-table closure | **`exact_complexity_9`** — 1419 needs exactly 9 gates |
+| [Witness/](Witness/README.md) | explicit 1024-bit `T_star` | Lemmas 1–3 of the Clay claim |
+| [Andreev/](Andreev/README.md) | N^1.01 lift tables, measured crossings | how 9 gates at n=4 grows into a separation shape |
+| [CookLevin/](CookLevin/README.md) | Tseitin-concrete Cook-Levin | Gate 1 of the conditional chain |
+| [Ppoly/](Ppoly/README.md) | concrete P ⊆ P/poly | the trivial-but-explicit end |
+| [MMW/](MMW/README.md) | MCSP + magnification chain | the open research frontier (marked sorries) |
+| [Final/](Final/README.md) | 9-way and 10-way conjunctions | **the certified summary** — verify `ClayFinalUnifiedClean.lean` |
+| [Protocol/](Protocol/README.md) | SuperBric packaging | importable reference surface |
+| [Archive/](Archive/README.md) | superseded drafts | provenance only — not part of the claim |
+
+---
+
 ## Where 1419 came from — and where the 35 brothers go
 
 This repo sits at the middle of a three-step chain in the Opera:
@@ -22,8 +42,8 @@ Three known obstacles prevent naive proofs of P≠NP: BGS relativization (1975),
 **Here — this repo answers yes.**
 Witness 1419=3×11×43 (popcount 6, residue 153 mod 211) passes all three barriers. It is not isolated: it generates a 35-element family, every member satisfying property P. The 35 brothers arise 24× over uniform expectation and are certified by `native_decide`. The mechanics of the barriers live in p-vs-np; the study of 1419 and the brothers lives here.
 
-**Downstream — [brothers-desert-proof](https://github.com/DavidFox998/brothers-desert-proof) uses the brothers to prove RH.**
-The 35 brothers discovered here form the discrete self-symmetry lattice of Route D (Act IV) of the Opera. Their orbit structure — distinct residues mod 191 and mod 36863, certified empty desert 192..1000, pairwise Hamming distance ≥2 — together with the functional equation s↔1−s, forces all non-trivial zeros of ζ onto Re=1/2. The barrier-bypass property established in this repo is what makes them the right objects for that proof.
+**Downstream — [brothers-desert-proof](https://github.com/DavidFox998/brothers-desert-proof) uses the brothers toward RH.**
+The 35 brothers discovered here form the discrete self-symmetry lattice of Route D (Act IV) of the Opera. Their orbit structure — distinct residues mod 191 and mod 36863, certified empty desert 192..1000, pairwise Hamming distance ≥2 — together with the functional equation s↔1−s, feeds the conditional reduction toward Re=1/2. The barrier-bypass property established in this repo is what makes them the right objects for that route. RH itself remains OPEN — Route D is a Lean-verified conditional architecture, not a claimed proof.
 
 ---
 
@@ -89,7 +109,7 @@ Result: 31 brothers require ≥8 gates.
 - `α₀ = 299 + π/10 = 299.3141592653...` — irrational, transcendental
 - `α₂ = 1597/2584 = F₁₇/F₁₈`, `φ ≈ 1.618`
 - 600-cell wireframe H4 symmetry — 35 → 56 points next shell
-- Master constants: `Q5=226`, `bound = a6·Q5²−1 = 733·226²−1 = 82829`, `Q6 = 733·226+31 = 165689` — all green `native_decide`
+- Master constants: `Q5=226`, `bound = 82829 = 733·113 = 733·(Q5/2)`, `Q6 = 733·226+31 = 165689` — all green `native_decide`
 
 ---
 
@@ -106,11 +126,11 @@ Twin family would be residue 155 mod 211, distance 2 mod 211 — pair `(153,155)
 
 ## Build status
 
-Build #94 CLEAN — zero `axiom` keyword, zero `sorry` keyword, all green `native_decide`. Explicit lower bounds proved, `P⊆Ppoly` concrete via TM tableau, Cook-Levin Tseitin concrete, MMW hypothesis `64>33` green. Full chain `P≠NP` conditional on MMW magnification (now theorem, not axiom).
+Build #94 CLEAN — **certified Clean set**: `Bounds/CircuitBounds9.lean`, `Final/ClayFinalClean.lean`, `ClayFinalUnifiedClean.lean`, `ClayPSubPpolyClean.lean`, `ClayCookLevinClean.lean`, `ClayMMWClean.lean`, `Witness/ClayClaim_fixed.lean`, the Family core, and the Andreev measured files — zero `axiom`, zero `sorry`, all `native_decide` green. Explicit lower bounds proved, `P⊆Ppoly` concrete via TM tableau, Cook-Levin Tseitin concrete, MMW hypothesis instance `64>33` green.
 
-Clean files verified: `ClayFinalClean.lean`, `ClayFinalUnifiedClean.lean`, `ClayPSubPpolyClean.lean`, `ClayCookLevinClean.lean`, `ClayMMWClean.lean` — all `forbidden? False`.
+**Honesty note:** research files outside the Clean set — `MMW/ClayRealMCSP.lean`, `MMW/ClayRealMagnification.lean`, `Andreev/ClayAndreevLift.lean` — carry documented `sorry` placeholders and are not part of the certified claim. The full P≠NP chain stays **conditional** on the MMW magnification verifiers; see [MMW/README.md](MMW/README.md).
 
-`distinct = 99.999976% = 4194303/4194304`
+`distinct = 99.999976% = 4194303/4194304` — see [Final/README.md](Final/README.md) for the clause list.
 
 ## Opera Numerorum — 19 repos
 
